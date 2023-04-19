@@ -109,7 +109,7 @@ public class Place implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Place[ idplace=" + idplace + " ]";
+        return idplace + ";" + nomePlace + ";" + descPlace + ";" + (temDedo==1?"Sim":"Não") + ";" + cidadeIdcidade;
     }
     
 }

@@ -86,7 +86,7 @@ public class CorOlhos implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.CorOlhos[ idcorOlhos=" + idcorOlhos + " ]";
+        return idcorOlhos + ";" + cor + ";" + (heterocromia==1?"Sim":"Não");
     }
     
 }

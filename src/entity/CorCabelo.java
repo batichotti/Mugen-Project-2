@@ -76,7 +76,7 @@ public class CorCabelo implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.CorCabelo[ idcorCabelo=" + idcorCabelo + " ]";
+        return idcorCabelo + ";" + cor;
     }
     
 }

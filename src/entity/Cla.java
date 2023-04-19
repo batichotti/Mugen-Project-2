@@ -86,7 +86,7 @@ public class Cla implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Cla[ idcla=" + idcla + " ]";
+        return idcla + ";" + nomeCla + ";" + descCla;
     }
     
 }

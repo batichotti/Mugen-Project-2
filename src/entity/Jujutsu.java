@@ -96,7 +96,7 @@ public class Jujutsu implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Jujutsu[ idjujutsu=" + idjujutsu + " ]";
+        return idjujutsu + ";" + jujutsuName + ";" + danoBase;
     }
     
 }

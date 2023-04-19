@@ -86,7 +86,7 @@ public class Grade implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Grade[ idgrade=" + idgrade + " ]";
+        return idgrade + ";" + nomeGrade + ";" + descricao;
     }
     
 }

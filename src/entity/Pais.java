@@ -89,7 +89,7 @@ public class Pais implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Pais[ idpais=" + idpais + " ]";
+        return idpais + ";" + nomePais;
     }
     
 }

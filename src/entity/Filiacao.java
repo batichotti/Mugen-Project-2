@@ -86,7 +86,7 @@ public class Filiacao implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Filiacao[ idfiliacao=" + idfiliacao + " ]";
+        return idfiliacao + ";" + filiacao + ";" + descFiliacao;
     }
     
 }

@@ -96,7 +96,7 @@ public class Arma implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Arma[ idarma=" + idarma + " ]";
+        return idarma + ";" + nomeArma + ";" + descArma + ";" + dano;
     }
     
 }
