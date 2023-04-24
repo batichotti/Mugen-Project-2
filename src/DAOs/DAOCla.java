@@ -52,16 +52,16 @@ public int autoIdCla() {
 
         List<String> ls = new ArrayList<>();
         for (int i = 0; i < lf.size(); i++) {
-            ls.add(lf.get(i).getnome_cla()+ "-" + lf.get(i).getidcla());
+            ls.add(lf.get(i).getNomeCla()+ "-" + lf.get(i).getIdcla());
         }
         return ls;
     }
 
     public static void main(String[] args) {
-        DAOTrabalhador daoCla = new DAOCla();
+        DAOCla daoCla = new DAOCla();
         List<Cla> listaCla = daoCla.list();
         for (Cla cla : listaCla) {
-            System.out.println(cla.getidcla()+ "-" + cla.getnome_cla());
+            System.out.println(cla.getIdcla()+ "-" + cla.getNomeCla());
         }
     }
 }

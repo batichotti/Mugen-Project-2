@@ -52,16 +52,16 @@ public int autoIdJujutsu() {
 
         List<String> ls = new ArrayList<>();
         for (int i = 0; i < lf.size(); i++) {
-            ls.add(lf.get(i).getjujutsu_name()+ "-" + lf.get(i).getidjujutsu());
+            ls.add(lf.get(i).getJujutsuName()+ "-" + lf.get(i).getIdjujutsu());
         }
         return ls;
     }
 
     public static void main(String[] args) {
-        DAOTrabalhador daoJujutsu = new DAOJujutsu();
+        DAOJujutsu daoJujutsu = new DAOJujutsu();
         List<Jujutsu> listaJujutsu = daoJujutsu.list();
         for (Jujutsu jujutsu : listaJujutsu) {
-            System.out.println(jujutsu.getidjujutsu()+ "-" + jujutsu.getjujutsu_name());
+            System.out.println(jujutsu.getIdjujutsu()+ "-" + jujutsu.getJujutsuName());
         }
     }
 }

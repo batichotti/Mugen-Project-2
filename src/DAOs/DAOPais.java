@@ -52,16 +52,16 @@ public int autoIdPais() {
 
         List<String> ls = new ArrayList<>();
         for (int i = 0; i < lf.size(); i++) {
-            ls.add(lf.get(i).getnome_pais()+ "-" + lf.get(i).getidpais());
+            ls.add(lf.get(i).getNomePais()+ "-" + lf.get(i).getIdpais());
         }
         return ls;
     }
 
     public static void main(String[] args) {
-        DAOTrabalhador daoPais = new DAOPais();
+        DAOPais daoPais = new DAOPais();
         List<Pais> listaPais = daoPais.list();
         for (Pais pais : listaPais) {
-            System.out.println(pais.getidpais()+ "-" + pais.getnome_pais());
+            System.out.println(pais.getIdpais()+ "-" + pais.getNomePais());
         }
     }
 }

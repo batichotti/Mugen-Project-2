@@ -25,21 +25,21 @@ public int autoIdArma() {
     }
 
     public List<Arma> listByNome(String nome) {
-        return em.createQuery("SELECT e FROM arma e WHERE e.idraca LIKE :nome")
+        return em.createQuery("SELECT e FROM Arma e WHERE e.idarma LIKE :nome")
          .setParameter("nome", "%" + nome + "%")
          .getResultList();
     }
 
     public List<Arma> listById(int id) {
-        return em.createQuery("SELECT e FROM arma e WHERE e.nome_arma= :id").setParameter("id", id).getResultList();
+        return em.createQuery("SELECT e FROM Arma e WHERE e.nome_arma= :id").setParameter("id", id).getResultList();
     }
 
     public List<Arma> listInOrderNome() {
-        return em.createQuery("SELECT e FROM arma e ORDER BY e.idarma").getResultList();
+        return em.createQuery("SELECT e FROM Arma e ORDER BY e.idarma").getResultList();
     }
 
     public List<Arma> listInOrderId() {
-        return em.createQuery("SELECT e FROM arma e ORDER BY e.nome_arma").getResultList();
+        return em.createQuery("SELECT e FROM Arma e ORDER BY e.nome_arma").getResultList();
     }
 
     public List<String> listInOrderNomeStrings(String qualOrdem) {

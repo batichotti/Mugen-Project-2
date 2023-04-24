@@ -52,16 +52,16 @@ public int autoIdRaca() {
 
         List<String> ls = new ArrayList<>();
         for (int i = 0; i < lf.size(); i++) {
-            ls.add(lf.get(i).getnome_raca()+ "-" + lf.get(i).getidraca());
+            ls.add(lf.get(i).getNomeRaca()+ "-" + lf.get(i).getIdraca());
         }
         return ls;
     }
 
     public static void main(String[] args) {
-        DAOTrabalhador daoRaca = new DAORaca();
+        DAORaca daoRaca = new DAORaca();
         List<Raca> listaRaca = daoRaca.list();
         for (Raca raca : listaRaca) {
-            System.out.println(raca.getidraca()+ "-" + raca.getnome_raca());
+            System.out.println(raca.getIdraca()+ "-" + raca.getNomeRaca());
         }
     }
 }

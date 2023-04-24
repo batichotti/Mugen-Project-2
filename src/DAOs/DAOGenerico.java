@@ -65,6 +65,6 @@ public class DAOGenerico<T> {
     }
 
     public List<T> list() {
-        return em.createQuery("SELECT e FROM " + stringTools.plMinus(clazz.getSimpleName()) + " e").getResultList();
+        return em.createQuery("SELECT e FROM " + (clazz.getSimpleName()) + " e").getResultList();
     }
 }

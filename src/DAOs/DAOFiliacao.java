@@ -52,16 +52,16 @@ public int autoIdFiliacao() {
 
         List<String> ls = new ArrayList<>();
         for (int i = 0; i < lf.size(); i++) {
-            ls.add(lf.get(i).getfiliacao()+ "-" + lf.get(i).getidfiliacao());
+            ls.add(lf.get(i).getFiliacao()+ "-" + lf.get(i).getIdfiliacao());
         }
         return ls;
     }
 
     public static void main(String[] args) {
-        DAOTrabalhador daoFiliacao = new DAOFiliacao();
+        DAOFiliacao daoFiliacao = new DAOFiliacao();
         List<Filiacao> listaFiliacao = daoFiliacao.list();
         for (Filiacao filiacao : listaFiliacao) {
-            System.out.println(filiacao.getidfiliacao()+ "-" + filiacao.getfiliacao());
+            System.out.println(filiacao.getIdfiliacao()+ "-" + filiacao.getFiliacao());
         }
     }
 }

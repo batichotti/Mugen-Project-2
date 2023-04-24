@@ -52,16 +52,16 @@ public int autoIdCorCabelo() {
 
         List<String> ls = new ArrayList<>();
         for (int i = 0; i < lf.size(); i++) {
-            ls.add(lf.get(i).getcor()+ "-" + lf.get(i).getidcor_cabelo());
+            ls.add(lf.get(i).getCor()+ "-" + lf.get(i).getIdcorCabelo());
         }
         return ls;
     }
 
     public static void main(String[] args) {
-        DAOTrabalhador daoCorCabelo = new DAOCorCabelo();
+        DAOCorCabelo daoCorCabelo = new DAOCorCabelo();
         List<CorCabelo> listaCorCabelo = daoCorCabelo.list();
         for (CorCabelo corCabelo : listaCorCabelo) {
-            System.out.println(corCabelo.getidcor_cabelo()+ "-" + corCabelo.getcor());
+            System.out.println(corCabelo.getIdcorCabelo()+ "-" + corCabelo.getCor());
         }
     }
 }
