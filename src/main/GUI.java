@@ -40,7 +40,7 @@ class GUI extends JFrame {
     JButton btInfos = new JButton("Characters Info");
     JButton btPlaces = new JButton("Places Info");
     JButton btFaceRecog = new JButton("JFaceRecog");
-    JButton btInventory = new JButton("Inventory");
+    JButton btCRUD = new JButton("CRUD");
 
     Musicas musicas = new Musicas();
 
@@ -108,13 +108,19 @@ class GUI extends JFrame {
             }
         });
 
-        //Inventory Button
-        btInventory.addActionListener(new ActionListener() {
+        //CRUD Button
+        btCRUD.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //GUI_Inventory gui_Inventory = new GUI_Inventory();
-                //gui_Inventory.start_frame();
-                JOptionPane.showMessageDialog(null, "Coming soon...");
+                try {
+                    CRUD_GUI crud_gui = new CRUD_GUI();
+                } catch (UnsupportedAudioFileException ex) {
+                    Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (LineUnavailableException ex) {
+                    Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
 
@@ -134,14 +140,14 @@ class GUI extends JFrame {
         pnOeste.add(btInfos);
         pnOeste.add(btPlaces);
         pnOeste.add(btFaceRecog);
-        pnOeste.add(btInventory);
+        pnOeste.add(btCRUD);
         pnOeste.add(btExit);
 
         btPlay.setBackground(Color.WHITE);
         btInfos.setBackground(Color.WHITE);
         btPlaces.setBackground(Color.WHITE);
         btFaceRecog.setBackground(Color.WHITE);
-        btInventory.setBackground(Color.WHITE);
+        btCRUD.setBackground(Color.WHITE);
         btExit.setBackground(Color.WHITE);
         pnCentro.setBackground(Color.WHITE);
 

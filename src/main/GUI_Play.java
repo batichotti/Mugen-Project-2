@@ -63,7 +63,7 @@ public class GUI_Play extends JPanel implements Runnable {
 
     public void setupGame() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         aSetter.setObject();
-        musicas.playSound("D:\\Mateus CohuzEr\\Documents\\NetBeansProjects\\Mugen_Project\\src\\res\\musics\\dun_dun.wav");
+        musicas.playSound("D:\\Mateus Cohuzer\\Desktop\\Geral\\Java\\Mugen_Project\\src\\res\\musics\\dun_dun.wav");
     }
 
     public void startGameThread() {

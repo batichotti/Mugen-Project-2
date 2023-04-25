@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -144,7 +145,7 @@ public class JFactorGUI extends JDialog {
                 if (file.exists()) {
                     caixaDeDialogo.setCurrentDirectory(file);
                 } else {
-                    file = new File("D:\\Mateus CohuzEr\\Documents\\NetBeansProjects\\GeradorRaposasB");
+                    file = new File("D:\\Mateus CohuzEr\\Documents\\NetBeansProjects");
                     if (file.exists()) {
                         caixaDeDialogo.setCurrentDirectory(file);
                     } else {
@@ -161,6 +162,8 @@ public class JFactorGUI extends JDialog {
             }
         }
         );
+        
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../res/imgs/icon.png")));
 
         setModal(
                 true);
