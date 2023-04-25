@@ -61,10 +61,10 @@ class CRUD_GUI extends JFrame {
         pnCentro.add(lbCentro);
 
         try {
-            ImageIcon icone = new ImageIcon(getClass().getResource("../res/imgs/StartScreen_Gojou_MugenProject.jpg"));
+            ImageIcon icone = new ImageIcon(getClass().getResource("../res/imgs/StartScreen_Yuta_MugenProject.jpg"));
             Image imagemAux;
             imagemAux = icone.getImage();
-            icone.setImage(imagemAux.getScaledInstance(1150, 680, Image.SCALE_FAST));
+            icone.setImage(imagemAux.getScaledInstance(1100, 950, Image.SCALE_FAST));
 
             lbCentro.setIcon(icone);
         } catch (Exception e) {
@@ -179,7 +179,7 @@ class CRUD_GUI extends JFrame {
 
         setTitle("Mugen Project");
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../res/imgs/icon.png")));
-        setSize(1280, 720);
+        setSize(1480, 920);
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
