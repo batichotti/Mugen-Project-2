@@ -1,6 +1,6 @@
 package main;
 
-import Entidades.CorOlhos;
+import Entidades.Cor_olhos;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -52,7 +52,7 @@ public class Cor_OlhosGUI extends JDialog {
     private JPanel pnListagem = new JPanel(new GridLayout(1, 1));
     private JPanel pnVazio = new JPanel(new GridLayout(6, 1));
 
-    CorOlhos cor_Olhos = new CorOlhos();
+    Cor_olhos cor_Olhos = new Cor_olhos();
 
     private CardLayout cardLayout;////////////////////////////////// - MUTÁVEL - //////////////////////////////////
 //pk
@@ -197,7 +197,7 @@ public class Cor_OlhosGUI extends JDialog {
                         cor_Olhos.setHeterocromia(heterocromia_escopo);
                         daoCor_Olhos.atualizar(cor_Olhos);
                     } else { //acao == adicionar
-                        cor_Olhos = new CorOlhos();
+                        cor_Olhos = new Cor_olhos();
                         cor_Olhos.setIdcorOlhos(Integer.valueOf(tfIdcor_olhos.getText()));
                         cor_Olhos.setCor(tfCor.getText());
                         cor_Olhos.setHeterocromia(heterocromia_escopo);
@@ -264,7 +264,7 @@ public class Cor_OlhosGUI extends JDialog {
         btListar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                List<CorOlhos> listaCor_Olhos = daoCor_Olhos.listInOrderNome();
+                List<Cor_olhos> listaCor_Olhos = daoCor_Olhos.listInOrderNome();
                 String[] colunas = new String[]{"id", "Color", "Heterochromia"};
                 String[][] dados = new String[listaCor_Olhos.size()][colunas.length];
                 String aux[];

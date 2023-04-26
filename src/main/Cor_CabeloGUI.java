@@ -1,6 +1,6 @@
 package main;
 
-import Entidades.CorCabelo;
+import Entidades.Cor_cabelo;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -31,7 +31,7 @@ import DAOs.DAOCorCabelo;
  *
  * @author Mateus Batichotti Silva | 19/04/2023 - 15:47:14
  */
-public class CorCabeloGUI extends JDialog {
+public class Cor_CabeloGUI extends JDialog {
 
     Container cp;
     JPanel pnNorte = new JPanel();
@@ -52,7 +52,7 @@ public class CorCabeloGUI extends JDialog {
     private JPanel pnListagem = new JPanel(new GridLayout(1, 1));
     private JPanel pnVazio = new JPanel(new GridLayout(6, 1));
 
-    CorCabelo corCabelo = new CorCabelo();
+    Cor_cabelo corCabelo = new Cor_cabelo();
 
     private CardLayout cardLayout;////////////////////////////////// - MUTÁVEL - //////////////////////////////////
 //pk
@@ -66,7 +66,7 @@ public class CorCabeloGUI extends JDialog {
     DefaultTableModel model = new DefaultTableModel(dados, colunas);
     JTable tabela = new JTable(model);
 
-    public CorCabeloGUI() {
+    public Cor_CabeloGUI() {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         cp = getContentPane();
         cp.setLayout(new BorderLayout());
@@ -181,7 +181,7 @@ public class CorCabeloGUI extends JDialog {
                         corCabelo.setCor(tfCor.getText());
                         daoCorCabelo.atualizar(corCabelo);
                     } else { //acao == adicionar
-                        corCabelo = new CorCabelo();
+                        corCabelo = new Cor_cabelo();
                         corCabelo.setIdcorCabelo(Integer.valueOf(tfIdcor_cabelo.getText()));
                         corCabelo.setCor(tfCor.getText());
                         daoCorCabelo.inserir(corCabelo);
@@ -244,7 +244,7 @@ public class CorCabeloGUI extends JDialog {
         btListar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                List<CorCabelo> listaCorCabelo = daoCorCabelo.listInOrderNome();
+                List<Cor_cabelo> listaCorCabelo = daoCorCabelo.listInOrderId();
                 String[] colunas = new String[]{"id", "Color"};
                 String[][] dados = new String[listaCorCabelo.size()][colunas.length];
                 String aux[];

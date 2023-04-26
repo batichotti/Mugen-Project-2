@@ -18,34 +18,32 @@ import javax.persistence.Table;
  * @author Mateus Cohuzer
  */
 @Entity
-@Table(name = "cor_olhos")
+@Table(name = "Cor_cabelo")
 @NamedQueries({
-    @NamedQuery(name = "CorOlhos.findAll", query = "SELECT c FROM CorOlhos c")})
-public class CorOlhos implements Serializable {
+    @NamedQuery(name = "Cor_cabelo.findAll", query = "SELECT c FROM Cor_cabelo c")})
+public class Cor_cabelo implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "idcor_olhos")
-    private Integer idcorOlhos;
+    @Column(name = "idcor_cabelo")
+    private Integer idcorCabelo;
     @Column(name = "cor")
     private String cor;
-    @Column(name = "heterocromia")
-    private Short heterocromia;
 
-    public CorOlhos() {
+    public Cor_cabelo() {
     }
 
-    public CorOlhos(Integer idcorOlhos) {
-        this.idcorOlhos = idcorOlhos;
+    public Cor_cabelo(Integer idcorCabelo) {
+        this.idcorCabelo = idcorCabelo;
     }
 
-    public Integer getIdcorOlhos() {
-        return idcorOlhos;
+    public Integer getIdcorCabelo() {
+        return idcorCabelo;
     }
 
-    public void setIdcorOlhos(Integer idcorOlhos) {
-        this.idcorOlhos = idcorOlhos;
+    public void setIdcorCabelo(Integer idcorCabelo) {
+        this.idcorCabelo = idcorCabelo;
     }
 
     public String getCor() {
@@ -56,29 +54,21 @@ public class CorOlhos implements Serializable {
         this.cor = cor;
     }
 
-    public Short getHeterocromia() {
-        return heterocromia;
-    }
-
-    public void setHeterocromia(Short heterocromia) {
-        this.heterocromia = heterocromia;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idcorOlhos != null ? idcorOlhos.hashCode() : 0);
+        hash += (idcorCabelo != null ? idcorCabelo.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CorOlhos)) {
+        if (!(object instanceof Cor_cabelo)) {
             return false;
         }
-        CorOlhos other = (CorOlhos) object;
-        if ((this.idcorOlhos == null && other.idcorOlhos != null) || (this.idcorOlhos != null && !this.idcorOlhos.equals(other.idcorOlhos))) {
+        Cor_cabelo other = (Cor_cabelo) object;
+        if ((this.idcorCabelo == null && other.idcorCabelo != null) || (this.idcorCabelo != null && !this.idcorCabelo.equals(other.idcorCabelo))) {
             return false;
         }
         return true;
@@ -86,7 +76,7 @@ public class CorOlhos implements Serializable {
 
     @Override
     public String toString() {
-        return idcorOlhos + ";" + cor + ";" + (heterocromia==1?"Sim":"Não");
+        return idcorCabelo + ";" + cor;
     }
     
 }

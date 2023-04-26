@@ -9,10 +9,10 @@
     <class>Entidades.Arma</class>
     <class>Entidades.Cla</class>
     <class>Entidades.Jujutsu</class>
-    <class>Entidades.CorOlhos</class>
     <class>Entidades.Place</class>
-    <class>Entidades.CorCabelo</class>
     <class>Entidades.Raca</class>
+    <class>Entidades.Cor_cabelo</class>
+    <class>Entidades.Cor_olhos</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/mugen_project?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="matt"/>

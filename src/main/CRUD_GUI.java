@@ -88,7 +88,7 @@ class CRUD_GUI extends JFrame {
         btCorCabelo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CorCabeloGUI ccGUI = new CorCabeloGUI();
+                Cor_CabeloGUI ccGUI = new Cor_CabeloGUI();
             }
         });
 

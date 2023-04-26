@@ -65,7 +65,7 @@ public class JujutsuGUI extends JDialog {
     JLabel lbDano_base = new JLabel("Base Damage");
     JTextField tfDano_base = new JTextField(25);
     DAOJujutsu daoJujutsu = new DAOJujutsu();
-    String[] colunas = new String[]{"id", "Name", "Jujutsu", "Base Damage"};
+    String[] colunas = new String[]{"id", "Name", "Description", "Base Damage"};
     String[][] dados = new String[0][colunas.length];
     DefaultTableModel model = new DefaultTableModel(dados, colunas);
     JTable tabela = new JTable(model);
@@ -281,7 +281,7 @@ public class JujutsuGUI extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 List<Jujutsu> listaJujutsu = daoJujutsu.listInOrderNome();
-                String[] colunas = new String[]{"id", "Name", "Jujutsu", "Base Damage"};
+                String[] colunas = new String[]{"id", "Name", "Description", "Base Damage"};
                 String[][] dados = new String[listaJujutsu.size()][colunas.length];
                 String aux[];
                 for (int i = 0; i < listaJujutsu.size(); i++) {
