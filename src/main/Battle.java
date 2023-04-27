@@ -39,7 +39,7 @@ public class Battle extends JDialog {
     JButton bt3 = new JButton();
     JButton bt4 = new JButton();
     JButton btExit = new JButton();
-    JButton btStartBattle = new JButton();
+    JButton btDev = new JButton();
 
     JProgressBar lifePlayer = new JProgressBar();
     JProgressBar lifeRival = new JProgressBar();
@@ -132,13 +132,13 @@ public class Battle extends JDialog {
         bt4.setBackground(Color.WHITE);
 
         btExit.setBackground(Color.GRAY);
-        btStartBattle.setBackground(Color.GRAY);
+        btDev.setBackground(Color.GRAY);
 
-        pnSul.add(btStartBattle);
+        pnSul.add(btDev);
         pnSul.add(btExit);
 
         btExit.setText("Exit");
-        btStartBattle.setText("Dev Button");
+        btDev.setText("Dev Button");
 
         bt1.addActionListener(new ActionListener() {
             @Override
@@ -148,7 +148,9 @@ public class Battle extends JDialog {
                 rivalLifePoints -= 130;
                 updateHP(lifeRival, rivalLifePoints);
                 turnFlag = 1;
+                checkBattleResult(player);
                 botAttack(rivalName);
+                checkBattleResult(player);
             }
         });
 
@@ -160,7 +162,9 @@ public class Battle extends JDialog {
                 rivalLifePoints -= 80;
                 updateHP(lifeRival, rivalLifePoints);
                 turnFlag = 1;
+                checkBattleResult(player);
                 botAttack(rivalName);
+                checkBattleResult(player);
             }
         });
 
@@ -172,7 +176,9 @@ public class Battle extends JDialog {
                 rivalLifePoints -= 40;
                 updateHP(lifeRival, rivalLifePoints);
                 turnFlag = 1;
+                checkBattleResult(player);
                 botAttack(rivalName);
+                checkBattleResult(player);
             }
         });
 
@@ -184,7 +190,9 @@ public class Battle extends JDialog {
                 rivalLifePoints -= 160;
                 updateHP(lifeRival, rivalLifePoints);
                 turnFlag = 1;
+                checkBattleResult(player);
                 botAttack(rivalName);
+                checkBattleResult(player);
             }
         });
 
@@ -196,19 +204,20 @@ public class Battle extends JDialog {
             }
         });
 
-        btStartBattle.addActionListener(new ActionListener() {
+        btDev.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                while (playerLifePoints >= 0 || rivalLifePoints >= 0) {
-                    if (turnFlag == 0) {
-                        tfPlayerAct.setText("Seu Turno!");
-                        checkBattleResult(player);
-                    }
-                    if (turnFlag == 1) {
-                        tfRivalAct.setText("Turno do Oponente");
-                        checkBattleResult(player);
-                    }
-                }
+                System.out.println("oi");
+//                while (playerLifePoints >= 0 || rivalLifePoints >= 0) {
+//                    if (turnFlag == 0) {
+//                        tfPlayerAct.setText("Seu Turno!");
+//                        checkBattleResult(player);
+//                    }
+//                    if (turnFlag == 1) {
+//                        tfRivalAct.setText("Turno do Oponente");
+//                        checkBattleResult(player);
+//                    }
+//                }
             }
         });
 
@@ -268,13 +277,13 @@ public class Battle extends JDialog {
         String[] lista = loadRival(rivalName);
         Random random = new Random();
         int attack = random.nextInt(6);
-        while (attack == 0 || attack == 6) {
+        while (attack == 0 || attack == 6 || attack == 5) {
             attack = random.nextInt(6);
         }
         String[] escopo = lista[attack].split("-");
         tfRivalAct.setText("Hanami uses " + escopo[0]);
         playerLifePoints -= Integer.valueOf(escopo[1]);
-        updateHP(lifeRival, playerLifePoints);
+        updateHP(lifePlayer, playerLifePoints);
         turnFlag = 0;
     }
 
