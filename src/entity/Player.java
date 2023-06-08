@@ -23,7 +23,7 @@ public class Player extends Entity {
     int hasFinger = 0;
     public boolean trashBool = false;
     public int battleCount = 0;
-    public int playerLife;
+    public int playerLife = 100 + 200*hasFinger;
 
     int counterX;
     int counterY;
@@ -45,8 +45,6 @@ public class Player extends Entity {
         solidArea.height = 48;
         counterX = 48;
         counterY = 48;
-        playerLife = 100;
-
         setDefaultValues();
         getPlayerImage();
     }
@@ -139,6 +137,7 @@ public class Player extends Entity {
             switch (objectName) {
                 case "Sukuna Finger":
                     hasFinger++;
+                    System.out.println("You catcha " + hasFinger + " finger(s)");
                     playerLife += 200;
                     gp.obj[i] = null;
                     if (hasFinger == 3) {
@@ -153,12 +152,12 @@ public class Player extends Entity {
                         battleCount += 1;
                         Battle battle = new Battle();
                         System.out.println("Battle!");
+                        worldY += 20;
+                        worldX += 20;
                         battle.startBattle("Hanami");
                         if (!battle.isActive()) {
                             battleCount = 0;
                         }
-                        worldY -= 16;
-                        worldX -= 16;
                         break;
                     }
                     if (battleCount == -1) {
