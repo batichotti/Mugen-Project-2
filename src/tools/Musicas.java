@@ -55,4 +55,17 @@ public class Musicas {
             System.out.println("Archive not founded (music)");
         }
     }
+
+    public void playBGM3() {
+        try {
+            File file = new File("D:\\Mateus Cohuzer\\Desktop\\Geral\\Java\\Mugen_Project\\src\\res\\musics\\stop.wav");
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioStream);
+            
+            clip.start();
+        } catch (Exception e) {
+            System.out.println("Archive not founded (music)");
+        }
+    }
 }

@@ -1,22 +1,23 @@
 package DAOs;
 
-
 import Entidades.Pais;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  *
-* @author Mateus Batichotti Silva | 19/04/2023 - 15:55:43*/
-public class DAOPais extends DAOGenerico<Pais>{
-private List<Pais> lista = new ArrayList<>();
+ * @author Mateus Batichotti Silva | 19/04/2023 - 15:55:43
+ */
+public class DAOPais extends DAOGenerico<Pais> {
+
+    private List<Pais> lista = new ArrayList<>();
 
     public DAOPais() {
         super(Pais.class);
     }
-public int autoIdPais() {
-        Integer a = (Integer) em.createQuery("SELECT MAX(e.idpais) FROM Pais e ").getSingleResult(); 
+
+    public int autoIdPais() {
+        Integer a = (Integer) em.createQuery("SELECT MAX(e.idpais) FROM Pais e ").getSingleResult();
         if (a != null) {
             return a + 1;
         } else {
@@ -26,8 +27,8 @@ public int autoIdPais() {
 
     public List<Pais> listByNome(String nome) {
         return em.createQuery("SELECT e FROM Pais e WHERE e.idpais LIKE :nome")
-         .setParameter("nome", "%" + nome + "%")
-         .getResultList();
+                .setParameter("nome", "%" + nome + "%")
+                .getResultList();
     }
 
     public List<Pais> listById(int id) {
@@ -52,7 +53,7 @@ public int autoIdPais() {
 
         List<String> ls = new ArrayList<>();
         for (int i = 0; i < lf.size(); i++) {
-            ls.add(lf.get(i).getNomePais()+ "-" + lf.get(i).getIdpais());
+            ls.add(lf.get(i).getNomePais() + "-" + lf.get(i).getIdpais());
         }
         return ls;
     }
@@ -61,7 +62,7 @@ public int autoIdPais() {
         DAOPais daoPais = new DAOPais();
         List<Pais> listaPais = daoPais.list();
         for (Pais pais : listaPais) {
-            System.out.println(pais.getIdpais()+ "-" + pais.getNomePais());
+            System.out.println(pais.getIdpais() + "-" + pais.getNomePais());
         }
     }
 }

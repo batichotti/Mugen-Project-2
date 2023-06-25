@@ -1,22 +1,23 @@
 package DAOs;
 
-
 import Entidades.Cla;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  *
-* @author Mateus Batichotti Silva | 19/04/2023 - 15:54:37*/
-public class DAOCla extends DAOGenerico<Cla>{
-private List<Cla> lista = new ArrayList<>();
+ * @author Mateus Batichotti Silva | 19/04/2023 - 15:54:37
+ */
+public class DAOCla extends DAOGenerico<Cla> {
+
+    private List<Cla> lista = new ArrayList<>();
 
     public DAOCla() {
         super(Cla.class);
     }
-public int autoIdCla() {
-        Integer a = (Integer) em.createQuery("SELECT MAX(e.idcla) FROM Cla e ").getSingleResult(); 
+
+    public int autoIdCla() {
+        Integer a = (Integer) em.createQuery("SELECT MAX(e.idcla) FROM Cla e ").getSingleResult();
         if (a != null) {
             return a + 1;
         } else {
@@ -26,8 +27,8 @@ public int autoIdCla() {
 
     public List<Cla> listByNome(String nome) {
         return em.createQuery("SELECT e FROM Cla e WHERE e.idcla LIKE :nome")
-         .setParameter("nome", "%" + nome + "%")
-         .getResultList();
+                .setParameter("nome", "%" + nome + "%")
+                .getResultList();
     }
 
     public List<Cla> listById(int id) {
@@ -52,7 +53,7 @@ public int autoIdCla() {
 
         List<String> ls = new ArrayList<>();
         for (int i = 0; i < lf.size(); i++) {
-            ls.add(lf.get(i).getNomeCla()+ "-" + lf.get(i).getIdcla());
+            ls.add(lf.get(i).getNomeCla() + "-" + lf.get(i).getIdcla());
         }
         return ls;
     }
@@ -61,7 +62,7 @@ public int autoIdCla() {
         DAOCla daoCla = new DAOCla();
         List<Cla> listaCla = daoCla.list();
         for (Cla cla : listaCla) {
-            System.out.println(cla.getIdcla()+ "-" + cla.getNomeCla());
+            System.out.println(cla.getIdcla() + "-" + cla.getNomeCla());
         }
     }
 }

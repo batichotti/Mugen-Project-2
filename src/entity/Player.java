@@ -3,11 +3,15 @@ package entity;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import main.Battle;
 import main.GUI_Play;
 import main.KeyHandler;
+import org.json.simple.parser.ParseException;
 
 /**
  *
@@ -23,8 +27,8 @@ public class Player extends Entity {
     int hasFinger = 0;
     public boolean trashBool = false;
     public int battleCount = 0;
-    public int playerLife = 100 + 200*hasFinger;
-
+    public int playerLife = 100 + 200 * hasFinger;
+    
     int counterX;
     int counterY;
 
@@ -74,7 +78,7 @@ public class Player extends Entity {
         }
     }
 
-    public void update() throws InterruptedException {
+    public void update() throws InterruptedException, IOException, ProtocolException, MalformedURLException, ParseException {
 
         if (keyHandler.upPressed == true || keyHandler.downPressed == true || keyHandler.leftPressed == true || keyHandler.rightPressed == true) {
             if (keyHandler.upPressed == true) {
@@ -129,7 +133,7 @@ public class Player extends Entity {
         }
     }
 
-    public void pickUpObject(int i) throws InterruptedException {
+    public void pickUpObject(int i) throws InterruptedException, IOException, ProtocolException, MalformedURLException, ParseException {
         if (i != 999) {
 
             String objectName = gp.obj[i].name;
@@ -168,6 +172,12 @@ public class Player extends Entity {
                     if (hasFinger == 20) {
                         hasFinger += 15;
                     }
+                    break;
+                case "Fly Head":
+                    GUI_Bored gb = new GUI_Bored();
+                    gb.start_frame();
+                    worldX += 20;
+                    worldY += 20;
                     break;
             }
         }

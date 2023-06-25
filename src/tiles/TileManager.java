@@ -67,14 +67,6 @@ public class TileManager {
             
             tile[10] = new Tile();
             tile[10].image = ImageIO.read(getClass().getResourceAsStream("../res/imgs/Tiles/layer_10.jpg"));
-            
-            tile[11] = new Tile();
-            tile[11].image = ImageIO.read(getClass().getResourceAsStream("../res/imgs/Tiles/layer_11.jpg"));
-            tile[11].colision = true;
-            
-            tile[12] = new Tile();
-            tile[12].image = ImageIO.read(getClass().getResourceAsStream("../res/imgs/Tiles/layer_12.jpg"));
-            tile[12].colision = true;
 
         } catch (Exception e) {
             System.out.println(e);
@@ -106,7 +98,7 @@ public class TileManager {
             br.close();
 
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("TileManager error: "+e);
         }
     }
 

@@ -6,13 +6,15 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JPanel;
-import objects.OBJ_Sukuna_Finger;
 import objects.SuperObject;
+import org.json.simple.parser.ParseException;
 import tiles.TileManager;
 import tools.Musicas;
 
@@ -31,7 +33,7 @@ public class GUI_Play extends JPanel implements Runnable {
     public final int maxScreenRow = 12;
     public final int screenWidth = tileSize * maxScreenCol;
     public final int screenHeight = tileSize * maxScreenRow;
-    
+
     public Graphics2D g2;
 
     //WORLD SETTINGS
@@ -50,7 +52,7 @@ public class GUI_Play extends JPanel implements Runnable {
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
     public Player player = new Player(this, keyHandler);
-    public SuperObject obj[] = new SuperObject[5];
+    public SuperObject obj[] = new SuperObject[10];
 
     public GUI_Play() {
 
@@ -93,6 +95,10 @@ public class GUI_Play extends JPanel implements Runnable {
                     update();
                 } catch (InterruptedException ex) {
                     Logger.getLogger(GUI_Play.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(GUI_Play.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ParseException ex) {
+                    Logger.getLogger(GUI_Play.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 repaint();
                 delta--;
@@ -107,8 +113,8 @@ public class GUI_Play extends JPanel implements Runnable {
         }
     }
 
-    public void update() throws InterruptedException {
-            player.update();
+    public void update() throws InterruptedException, IOException, ProtocolException, MalformedURLException, ParseException {
+        player.update();
 
     }
 
@@ -122,15 +128,19 @@ public class GUI_Play extends JPanel implements Runnable {
         tileManager.draw(g2);
 
         //OBJECTS
-        for (int i = 0; i < obj.length; i++) {
-            if (obj[i] != null) {
-                obj[i].draw(g2, this);
+        try {
+            for (SuperObject obj1 : obj) {
+                if (obj1 != null) {
+                    obj1.draw(g2, this);
+                }
             }
+        } catch (Exception e) {
+            System.out.println("GUI_Play load obj error: " + e);
         }
 
         //PLAYER
         player.draw(g2);
-        
+
         g2.dispose();
     }
 }

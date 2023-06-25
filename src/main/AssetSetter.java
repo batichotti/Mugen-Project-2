@@ -3,6 +3,7 @@ package main;
 import objects.OBJ_Chest;
 import objects.OBJ_Sukuna_Finger;
 import objects.OBJ_Trash_Can;
+import objects.OBJ_Flyhead;
 
 /**
  *
@@ -36,5 +37,9 @@ public class AssetSetter {
         gp.obj[4] = new OBJ_Trash_Can();
         gp.obj[4].worldX = 18 * gp.tileSize;
         gp.obj[4].worldY = 6 * gp.tileSize;
+        
+        gp.obj[5] = new OBJ_Flyhead();
+        gp.obj[5].worldX = 48 * gp.tileSize;
+        gp.obj[5].worldY = 5 * gp.tileSize;
     }
 }

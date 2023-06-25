@@ -9,8 +9,6 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
@@ -44,7 +42,7 @@ class CRUD_GUI extends JFrame {
     JButton btJujutsu = new JButton("Jujutsu");
     JButton btPais = new JButton("País");
     JButton btPlayer = new JButton("Player");
-    JButton btPlayerHas = new JButton("Player Has");
+    JButton btCidade = new JButton("Cidade");
     JButton btRaca = new JButton("Raça");
     JButton btExit = new JButton("Exit");
 
@@ -133,6 +131,13 @@ class CRUD_GUI extends JFrame {
                 RacaGUI racaGUI = new RacaGUI();
             }
         });
+        
+        btCidade.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                PlaceGUI cidadeGUI = new PlaceGUI();
+            }
+        });
 
         //Exit Button
         btExit.addActionListener(new ActionListener() {
@@ -157,7 +162,7 @@ class CRUD_GUI extends JFrame {
         pnOeste.add(btPais);
         pnOeste.add(btRaca);
         pnOeste.add(btPlayer);
-        pnOeste.add(btPlayerHas);
+        pnOeste.add(btCidade);
         pnOeste.add(btExit);
 
         btArma.setBackground(Color.WHITE);
@@ -170,7 +175,7 @@ class CRUD_GUI extends JFrame {
         btJujutsu.setBackground(Color.WHITE);
         btPais.setBackground(Color.WHITE);
         btPlayer.setBackground(Color.WHITE);
-        btPlayerHas.setBackground(Color.WHITE);
+        btCidade.setBackground(Color.WHITE);
         btRaca.setBackground(Color.WHITE);
 
         pnCentro.setBackground(Color.WHITE);

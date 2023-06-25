@@ -24,7 +24,6 @@ import java.awt.Container;
 import java.awt.CardLayout;
 import java.awt.FlowLayout;
 import tools.ConverteDatas;
-import javax.swing.JCheckBox;
 import DAOs.DAOPais;
 
 /**

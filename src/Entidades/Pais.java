@@ -26,6 +26,9 @@ import javax.persistence.Table;
     @NamedQuery(name = "Pais.findAll", query = "SELECT p FROM Pais p")})
 public class Pais implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "paisIdpais")
+    private List<Cidade> cidadeList;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -80,6 +83,14 @@ public class Pais implements Serializable {
     @Override
     public String toString() {
         return idpais + ";" + nomePais;
+    }
+
+    public List<Cidade> getCidadeList() {
+        return cidadeList;
+    }
+
+    public void setCidadeList(List<Cidade> cidadeList) {
+        this.cidadeList = cidadeList;
     }
     
 }
