@@ -13,6 +13,8 @@
     <class>Entidades.Raca</class>
     <class>Entidades.Cor_cabelo</class>
     <class>Entidades.Cor_olhos</class>
+    <class>Entidades.PersonagemHasCla</class>
+    <class>Entidades.Personagem</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/mugen_project?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="matt"/>

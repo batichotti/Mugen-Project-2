@@ -109,7 +109,7 @@ public class Place implements Serializable {
 
     @Override
     public String toString() {
-        return "Entidades.Place[ idplace=" + idplace + " ]";
+        return idplace + ";" + nomePlace + ";" + descPlace + ";" + temDedo + ";" + cidadeIdcidade.toString().replace(";","-");
     }
     
 }

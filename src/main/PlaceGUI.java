@@ -25,8 +25,11 @@ import java.awt.CardLayout;
 import java.awt.FlowLayout;
 import tools.ConverteDatas;
 import DAOs.DAOCidade;
-import DAOs.DAOPais;
-import Entidades.Pais;
+import DAOs.DAOCidade;
+import DAOs.DAOPlace;
+import Entidades.Cidade;
+import Entidades.Place;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 
 /**
@@ -54,23 +57,29 @@ public class PlaceGUI extends JDialog {
     private JPanel pnListagem = new JPanel(new GridLayout(1, 1));
     private JPanel pnVazio = new JPanel(new GridLayout(6, 1));
 
-    Cidade cidade = new Cidade();
+    Place place = new Place();
 
     private CardLayout cardLayout;////////////////////////////////// - MUTÁVEL - //////////////////////////////////
 //pk
-    JLabel lbIdcidade = new JLabel("ID");
-    JTextField tfIdcidade = new JTextField(30);
-    
-    JLabel lbPais = new JLabel("País");
-    DAOPais daoPais = new DAOPais();
-    List<Pais> paises = daoPais.listInOrderNome();
-    Pais pais = new Pais();
-    JComboBox cbPais = new JComboBox();
-    
-    JLabel lbNome_cidade = new JLabel("Name");
-    JTextField tfNome_cidade = new JTextField(25);
+    JLabel lbIdplace = new JLabel("ID");
+    JTextField tfIdplace = new JTextField(30);
+
+    JLabel lbDesc = new JLabel("Descrição");
+    JTextField tfDesc = new JTextField(30);
+
+    JLabel lbCidade = new JLabel("Cidade");
     DAOCidade daoCidade = new DAOCidade();
-    String[] colunas = new String[]{"id", "Name", "País"};
+    List<Cidade> cidades = daoCidade.listInOrderNome();
+    Cidade cidade = new Cidade();
+    JComboBox cbCidade = new JComboBox();
+
+    JLabel lbDedo = new JLabel("Tem dedo?");
+    JCheckBox cbDedo = new JCheckBox();
+
+    JLabel lbNome_place = new JLabel("Name");
+    JTextField tfNome_place = new JTextField(25);
+    DAOPlace daoPlace = new DAOPlace();
+    String[] colunas = new String[]{"id", "Name", "Descrição", "Tem Dedo?", "País"};
     String[][] dados = new String[0][colunas.length];
     DefaultTableModel model = new DefaultTableModel(dados, colunas);
     JTable tabela = new JTable(model);
@@ -79,14 +88,14 @@ public class PlaceGUI extends JDialog {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         cp = getContentPane();
         cp.setLayout(new BorderLayout());
-        setTitle("CRUD - Country");
+        setTitle("CRUD - Place");
 
         //Add combo box
-        for (Pais pais_es : paises) {
-            String ditto = pais_es.toString().replace(";", "-");
-            cbPais.addItem(ditto);
+        for (Cidade cidade_es : cidades) {
+            String ditto = cidade_es.toString().replace(";", "-");
+            cbCidade.addItem(ditto);
         }
-        
+
         cp.add(pnNorte, BorderLayout.NORTH);
         cp.add(pnCentro, BorderLayout.CENTER);
         cp.add(pnSul, BorderLayout.SOUTH);
@@ -95,10 +104,10 @@ public class PlaceGUI extends JDialog {
         pnCentro.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         pnNorte.setLayout(new FlowLayout(FlowLayout.LEFT));
-        pnNorte.add(lbIdcidade);
-        pnNorte.add(tfIdcidade);
-        pnNorte.add(lbPais);
-        pnNorte.add(cbPais);
+        pnNorte.add(lbIdplace);
+        pnNorte.add(tfIdplace);
+        pnNorte.add(lbNome_place);
+        pnNorte.add(tfNome_place);
         pnNorte.add(btBuscar);
         pnNorte.add(btAdicionar);
         pnNorte.add(btAlterar);
@@ -107,8 +116,8 @@ public class PlaceGUI extends JDialog {
         pnNorte.add(btSalvar);
         pnNorte.add(btCancelar);
 
-        lbIdcidade.setVisible(true);
-        tfIdcidade.setVisible(true);
+        lbIdplace.setVisible(true);
+        tfIdplace.setVisible(true);
         btSalvar.setVisible(false);
         btAdicionar.setVisible(false);
         btAlterar.setVisible(false);
@@ -123,10 +132,14 @@ public class PlaceGUI extends JDialog {
         btExcluir.setBackground(Color.WHITE);
         btCancelar.setBackground(Color.WHITE);
         pnCentro.setLayout(new GridLayout(colunas.length - 1, 2));
-        pnCentro.add(lbNome_cidade);
-        pnCentro.add(tfNome_cidade);
-        pnCentro.add(lbPais);
-        pnCentro.add(cbPais);
+        pnCentro.add(lbNome_place);
+        pnCentro.add(tfNome_place);
+        pnCentro.add(lbDesc);
+        pnCentro.add(tfDesc);
+        pnCentro.add(lbDedo);
+        pnCentro.add(cbDedo);
+        pnCentro.add(lbCidade);
+        pnCentro.add(cbCidade);
         cardLayout = new CardLayout();
         pnSul.setLayout(cardLayout);
         for (int i = 0; i < 5; i++) {
@@ -138,10 +151,12 @@ public class PlaceGUI extends JDialog {
         tabela.setEnabled(false);
 
         pnAvisos.add(new JLabel("Avisos"));
-        tfIdcidade.setEditable(true);
-        tfNome_cidade.setText("");
-        tfNome_cidade.setEditable(false);
-        cbPais.setEnabled(false);
+        tfIdplace.setEditable(true);
+        tfNome_place.setText("");
+        tfNome_place.setEditable(false);
+        tfDesc.setEditable(false);
+        cbDedo.setEnabled(false);
+        cbCidade.setEnabled(false);
 
 //listeners
         btBuscar.addActionListener(new ActionListener() {
@@ -149,27 +164,39 @@ public class PlaceGUI extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 try {
                     cardLayout.show(pnSul, "avisos");
-                    cidade = daoCidade.obter(Integer.valueOf(tfIdcidade.getText()));
-                    if (cidade != null) {//achou o cidade na lista
+                    place = daoPlace.obter(Integer.valueOf(tfIdplace.getText()));
+                    if (place != null) {//achou o place na lista
                         //mostrar
                         btAdicionar.setVisible(false);
                         btAlterar.setVisible(true);
                         btExcluir.setVisible(true);
                         btCancelar.setVisible(true);
-                        tfNome_cidade.setText(cidade.getNomeCidade());
-                        tfNome_cidade.setEditable(false);
-                        cbPais.setSelectedItem(cidade.getPaisIdpais().toString().replace(";","-"));
-                        cbPais.setEnabled(false);
+                        tfNome_place.setText(place.getNomePlace());
+                        tfNome_place.setEditable(false);
+
+                        tfDesc.setText(place.getDescPlace());
+                        tfDesc.setEditable(false);
+
+                        cbDedo.setSelected(place.getTemDedo() == 1 ? true : false);
+                        cbDedo.setEnabled(false);
+
+                        cbCidade.setSelectedItem(place.getCidadeIdcidade().toString().replace(";", "-"));
+                        cbCidade.setEnabled(false);
                     } else {//não achou na lista
                         //mostrar botão incluir
 
                         btAdicionar.setVisible(true);
                         btAlterar.setVisible(false);
                         btExcluir.setVisible(false);
-                        tfIdcidade.setEditable(true);
-                        tfNome_cidade.setText("");
-                        tfNome_cidade.setEditable(false);
-                        cbPais.setEnabled(false);
+                        tfIdplace.setEditable(true);
+                        tfNome_place.setText("");
+
+                        tfDesc.setEditable(false);
+
+                        cbDedo.setEnabled(false);
+
+                        tfNome_place.setEditable(false);
+                        cbCidade.setEnabled(false);
                     }
                 } catch (Exception extru0) {
                     JOptionPane.showMessageDialog(null, "Algo deu errado");
@@ -181,11 +208,13 @@ public class PlaceGUI extends JDialog {
         btAdicionar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                tfIdcidade.setEnabled(false);
-                tfIdcidade.setEditable(true);
-                tfNome_cidade.requestFocus();
-                tfNome_cidade.setEditable(true);
-                cbPais.setEnabled(true);
+                tfIdplace.setEnabled(false);
+                tfIdplace.setEditable(true);
+                tfNome_place.requestFocus();
+                tfNome_place.setEditable(true);
+                cbDedo.setEnabled(true);
+                tfDesc.setEditable(true);
+                cbCidade.setEnabled(true);
                 btAdicionar.setVisible(false);
                 btSalvar.setVisible(true);
                 btCancelar.setVisible(true);
@@ -200,35 +229,49 @@ public class PlaceGUI extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
+                    Short tem_dedo_escopo;
+                    if (cbDedo.isSelected()) {
+                        tem_dedo_escopo = (short) 1;
+                    } else {
+                        tem_dedo_escopo = (short) 0;
+                    }
                     if (acao.equals("alterar")) {
-                        cidade.setIdcidade(Integer.valueOf(tfIdcidade.getText()));
-                        cidade.setNomeCidade(tfNome_cidade.getText());
-                        
-                        Pais selecionado = daoPais.obter(Integer.valueOf(String.valueOf(cbPais.getSelectedItem()).split("-")[0]));
-                        cidade.setPaisIdpais(selecionado);
-                        
-                        daoCidade.atualizar(cidade);
+                        place.setIdplace(Integer.valueOf(tfIdplace.getText()));
+                        place.setNomePlace(tfNome_place.getText());
+                        place.setDescPlace(tfDesc.getText());
+                        place.setTemDedo(tem_dedo_escopo);
+
+                        Cidade selecionado = daoCidade.obter(Integer.valueOf(String.valueOf(cbCidade.getSelectedItem()).split("-")[0]));
+                        place.setCidadeIdcidade(selecionado);
+
+                        daoPlace.atualizar(place);
                     } else { //acao == adicionar
-                        cidade = new Cidade();
-                        cidade.setIdcidade(Integer.valueOf(tfIdcidade.getText()));
-                        cidade.setNomeCidade(tfNome_cidade.getText());
-                        
-                        Pais selecionado = daoPais.obter(Integer.valueOf(String.valueOf(cbPais.getSelectedItem()).split("-")[0]));
-                        cidade.setPaisIdpais(selecionado);
-                        
-                        daoCidade.inserir(cidade);
+                        place = new Place();
+                        place.setIdplace(Integer.valueOf(tfIdplace.getText()));
+                        place.setNomePlace(tfNome_place.getText());
+                        place.setDescPlace(tfDesc.getText());
+                        place.setTemDedo(tem_dedo_escopo);
+
+                        Cidade selecionado = daoCidade.obter(Integer.valueOf(String.valueOf(cbCidade.getSelectedItem()).split("-")[0]));
+                        place.setCidadeIdcidade(selecionado);
+
+                        daoPlace.inserir(place);
                     }
                     btSalvar.setVisible(false);
                     btCancelar.setVisible(false);
                     btBuscar.setVisible(true);
                     btListar.setVisible(true);
-                    tfIdcidade.setEnabled(true);
-                    tfIdcidade.setEditable(true);
-                    tfIdcidade.requestFocus();
-                    tfIdcidade.setText("");
-                    tfNome_cidade.setText("");
-                    tfNome_cidade.setEditable(false);
-                    cbPais.setEnabled(false);
+                    tfIdplace.setEnabled(true);
+                    tfIdplace.setEditable(true);
+                    tfIdplace.requestFocus();
+                    tfIdplace.setText("");
+                    tfNome_place.setText("");
+                    tfNome_place.setEditable(false);
+                    cbCidade.setEnabled(false);
+                    tfDesc.setEditable(false);
+                    tfDesc.setText("");
+                    cbDedo.setEnabled(false);
+                    cbDedo.setSelected(false);
                 } catch (Exception macau1) {
                     JOptionPane.showMessageDialog(null, "Algo deu errado - btSalvar: " + macau1);
                 }
@@ -241,10 +284,12 @@ public class PlaceGUI extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 btBuscar.setVisible(false);
                 btAlterar.setVisible(false);
-                tfIdcidade.setEditable(false);
-                tfNome_cidade.requestFocus();
-                tfNome_cidade.setEditable(true);
-                cbPais.setEnabled(true);
+                tfIdplace.setEditable(false);
+                tfNome_place.requestFocus();
+                tfNome_place.setEditable(true);
+                cbDedo.setEnabled(true);
+                tfDesc.setEditable(true);
+                cbCidade.setEnabled(true);
                 btSalvar.setVisible(true);
                 btCancelar.setVisible(true);
                 btListar.setVisible(false);
@@ -262,30 +307,32 @@ public class PlaceGUI extends JDialog {
                         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
                 btExcluir.setVisible(false);
-                tfIdcidade.setEditable(false);
-                tfIdcidade.requestFocus();
-                tfIdcidade.setText("");
-                tfIdcidade.setEditable(true);
-                tfNome_cidade.setText("");
-                tfNome_cidade.setEditable(true);
-                cbPais.setEnabled(true);
+                tfIdplace.setEditable(false);
+                tfIdplace.requestFocus();
+                tfIdplace.setText("");
+                tfIdplace.setEditable(true);
+                tfNome_place.setText("");
+                tfNome_place.setEditable(false);
+                cbDedo.setEnabled(false);
+                tfDesc.setEditable(false);
+                cbCidade.setEnabled(false);
                 btAlterar.setVisible(false);
                 if (response == JOptionPane.YES_OPTION) {
-                    daoCidade.remover(cidade);
+                    daoPlace.remover(place);
                 }
             }
         });
-        
+
 //listener listar
         btListar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                List<Cidade> listaCidade = daoCidade.listInOrderNome();
-                String[] colunas = new String[]{"id", "Name", "País"};
-                String[][] dados = new String[listaCidade.size()][colunas.length];
+                List<Place> listaPlace = daoPlace.listInOrderNome();
+                String[] colunas = new String[]{"id", "Nome", "Descrição", "Tem Dedo?", "Cidade"};
+                String[][] dados = new String[listaPlace.size()][colunas.length];
                 String aux[];
-                for (int i = 0; i < listaCidade.size(); i++) {
-                    aux = listaCidade.get(i).toString().split(";");
+                for (int i = 0; i < listaPlace.size(); i++) {
+                    aux = listaPlace.get(i).toString().split(";");
                     for (int j = 0; j < colunas.length; j++) {
                         dados[i][j] = aux[j];
                     }
@@ -302,24 +349,33 @@ public class PlaceGUI extends JDialog {
 
             }
         });
-        
+
 //listener Cancelar
         btCancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 btCancelar.setVisible(false);
-                tfIdcidade.setText("");
-                tfIdcidade.requestFocus();
-                tfIdcidade.setEnabled(true);
-                tfIdcidade.setEditable(true);
-                tfNome_cidade.setText("");
-                tfNome_cidade.setEditable(false);
-                cbPais.setEnabled(false);
+                tfIdplace.setText("");
+                tfIdplace.requestFocus();
+                tfIdplace.setEnabled(true);
+                tfIdplace.setEditable(true);
+                tfNome_place.setText("");
+                tfIdplace.setText("");
+                tfNome_place.setText("");
+                tfNome_place.setEditable(false);
+                cbCidade.setEnabled(false);
+                tfDesc.setEditable(false);
+                tfDesc.setText("");
+                cbDedo.setEnabled(false);
+                cbDedo.setSelected(false);
+                tfNome_place.setEditable(false);
+                cbDedo.setEnabled(false);
+                tfDesc.setEditable(false);
+                cbCidade.setEnabled(false);
                 btBuscar.setVisible(true);
                 btListar.setVisible(true);
                 btSalvar.setVisible(false);
                 btCancelar.setVisible(false);
-
             }
         });
 //windão FECHAR O PROGRAMA

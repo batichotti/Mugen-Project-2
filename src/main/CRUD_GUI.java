@@ -43,8 +43,8 @@ class CRUD_GUI extends JFrame {
     JButton btPais = new JButton("País");
     JButton btPlayer = new JButton("Player");
     JButton btCidade = new JButton("Cidade");
+    JButton btPlace = new JButton("Place");
     JButton btRaca = new JButton("Raça");
-    JButton btExit = new JButton("Exit");
 
     Musicas musicas = new Musicas();
 
@@ -68,6 +68,13 @@ class CRUD_GUI extends JFrame {
         } catch (Exception e) {
             System.out.println("Erro ao carregar a imagem");
         }
+        
+        btPlayer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                PersonagemGUI personagemGUI = new PersonagemGUI();
+            }
+        });
 
         btArma.addActionListener(new ActionListener() {
             @Override
@@ -135,41 +142,36 @@ class CRUD_GUI extends JFrame {
         btCidade.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PlaceGUI cidadeGUI = new PlaceGUI();
+                CidadeGUI cidadeGUI = new CidadeGUI();
             }
         });
 
-        //Exit Button
-        btExit.addActionListener(new ActionListener() {
+        btPlace.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int option = JOptionPane.showConfirmDialog(null, "Do you want to exit the program?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if (option == JOptionPane.YES_OPTION) {
-                    System.exit(0);
-                }
+                PlaceGUI placeGUI = new PlaceGUI();
             }
-        });
+            }
+        );
 
         pnOeste.setLayout(new GridLayout(4, 3));
+        pnOeste.add(btPlayer);
         pnOeste.add(btArma);
         pnOeste.add(btCla);
+        pnOeste.add(btRaca);
         pnOeste.add(btCorCabelo);
         pnOeste.add(btCorOlhos);
-        pnOeste.add(btFiliacao);
         pnOeste.add(btFiliacao);
         pnOeste.add(btGrade);
         pnOeste.add(btJujutsu);
         pnOeste.add(btPais);
-        pnOeste.add(btRaca);
-        pnOeste.add(btPlayer);
         pnOeste.add(btCidade);
-        pnOeste.add(btExit);
-
+        pnOeste.add(btPlace);
+        
         btArma.setBackground(Color.WHITE);
         btCla.setBackground(Color.WHITE);
         btCorCabelo.setBackground(Color.WHITE);
         btCorOlhos.setBackground(Color.WHITE);
-        btExit.setBackground(Color.WHITE);
         btFiliacao.setBackground(Color.WHITE);
         btGrade.setBackground(Color.WHITE);
         btJujutsu.setBackground(Color.WHITE);
@@ -177,6 +179,7 @@ class CRUD_GUI extends JFrame {
         btPlayer.setBackground(Color.WHITE);
         btCidade.setBackground(Color.WHITE);
         btRaca.setBackground(Color.WHITE);
+        btPlace.setBackground(Color.WHITE);
 
         pnCentro.setBackground(Color.WHITE);
 

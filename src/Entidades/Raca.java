@@ -5,12 +5,15 @@
 package Entidades;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -22,6 +25,9 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Raca.findAll", query = "SELECT r FROM Raca r")})
 public class Raca implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "racaIdraca")
+    private List<Personagem> personagemList;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -87,6 +93,14 @@ public class Raca implements Serializable {
     @Override
     public String toString() {
         return idraca + ";" + nomeRaca + ";" + descricao;
+    }
+
+    public List<Personagem> getPersonagemList() {
+        return personagemList;
+    }
+
+    public void setPersonagemList(List<Personagem> personagemList) {
+        this.personagemList = personagemList;
     }
     
 }

@@ -79,7 +79,7 @@ public class CidadeGUI extends JDialog {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         cp = getContentPane();
         cp.setLayout(new BorderLayout());
-        setTitle("CRUD - Country");
+        setTitle("CRUD - Cidade");
 
         //Add combo box
         for (Pais pais_es : paises) {
@@ -267,8 +267,8 @@ public class CidadeGUI extends JDialog {
                 tfIdcidade.setText("");
                 tfIdcidade.setEditable(true);
                 tfNome_cidade.setText("");
-                tfNome_cidade.setEditable(true);
-                cbPais.setEnabled(true);
+                tfNome_cidade.setEditable(false);
+                cbPais.setEnabled(false);
                 btAlterar.setVisible(false);
                 if (response == JOptionPane.YES_OPTION) {
                     daoCidade.remover(cidade);
