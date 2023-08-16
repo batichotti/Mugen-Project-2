@@ -71,8 +71,23 @@ public class PersonagemGUI extends JDialog {
 
     private CardLayout cardLayout;////////////////////////////////// - MUTÁVEL - //////////////////////////////////
 //pk
-    JLabel lbIdPersonagem = new JLabel("ID");
-    JTextField tfIdPersonagem = new JTextField(30);
+    JLabel lbId = new JLabel("ID");
+    JTextField tfId = new JTextField(30);
+
+    JLabel lbNome = new JLabel("Nome");
+    JTextField tfNome = new JTextField(30);
+
+    JLabel lbIdade = new JLabel("Idade");
+    JTextField tfIdade = new JTextField(30);
+
+    JLabel lbAltura = new JLabel("Altura");
+    JTextField tfAltura = new JTextField(30);
+    
+    JLabel lbPeso = new JLabel("Peso");
+    JTextField tfPeso = new JTextField(30);
+
+    JLabel lbNascimento = new JLabel("Nascimento");
+    JTextField tfNascimento = new JTextField(30);
 
     JLabel lbRaca = new JLabel("Raça");
     DAORaca daoRaca = new DAORaca();
@@ -121,7 +136,7 @@ public class PersonagemGUI extends JDialog {
 
     DAOPersonagem daoPersonagem = new DAOPersonagem();
 
-    String[] colunas = new String[]{"id", "Name", "País"};
+    String[] colunas = new String[]{"id", "Name", "idade", "altura", "peso", "nascimento"};
     String[][] dados = new String[0][colunas.length];
     DefaultTableModel model = new DefaultTableModel(dados, colunas);
     JTable tabela = new JTable(model);
@@ -182,8 +197,8 @@ public class PersonagemGUI extends JDialog {
         pnCentro.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         pnNorte.setLayout(new FlowLayout(FlowLayout.LEFT));
-        pnNorte.add(lbIdPersonagem);
-        pnNorte.add(tfIdPersonagem);
+        pnNorte.add(lbId);
+        pnNorte.add(tfId);
 
         pnNorte.add(lbRaca);
         pnNorte.add(lbFiliacao);
@@ -191,7 +206,7 @@ public class PersonagemGUI extends JDialog {
         pnNorte.add(lbCorOlhos);
         pnNorte.add(lbCorCabelo);
         pnNorte.add(lbGrade);
-        pnNorte.add(lbIdPersonagem);
+        pnNorte.add(lbId);
 
         pnNorte.add(btBuscar);
         pnNorte.add(btAdicionar);
@@ -201,8 +216,8 @@ public class PersonagemGUI extends JDialog {
         pnNorte.add(btSalvar);
         pnNorte.add(btCancelar);
 
-        lbIdPersonagem.setVisible(true);
-        tfIdPersonagem.setVisible(true);
+        lbId.setVisible(true);
+        tfId.setVisible(true);
         btSalvar.setVisible(false);
         btAdicionar.setVisible(false);
         btAlterar.setVisible(false);
@@ -217,8 +232,21 @@ public class PersonagemGUI extends JDialog {
         btExcluir.setBackground(Color.WHITE);
         btCancelar.setBackground(Color.WHITE);
         pnCentro.setLayout(new GridLayout(colunas.length - 1, 2));
-        pnCentro.add(lbNome_cidade);
-        pnCentro.add(tfNome_Personagem);
+        
+        pnCentro.add(lbNome);
+        pnCentro.add(tfNome);
+        
+        pnCentro.add(lbIdade);
+        pnCentro.add(tfIdade);
+        
+        pnCentro.add(lbAltura);
+        pnCentro.add(tfAltura);
+        
+        pnCentro.add(lbPeso);
+        pnCentro.add(tfPeso);
+        
+        pnCentro.add(lbNascimento);
+        pnCentro.add(tfNascimento);
 
         pnCentro.add(lbRaca);
         pnCentro.add(cbRaca);
