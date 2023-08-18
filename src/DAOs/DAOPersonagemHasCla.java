@@ -34,18 +34,4 @@ public class DAOPersonagemHasCla extends DAOGenerico<PersonagemHasCla> {
         }
         return ls;
     }
-    
-    public void listarModoTexto(){
-        List<PersonagemHasCla> lista = list();
-        System.out.println("-------------------------------------");
-        for (PersonagemHasCla phc : lista) {
-            System.out.println(phc.getPersonagem().getNomePersonagem());
-        }
-        System.out.println("-------------------------------------");
-    }
-    
-    public static void main(String[] args) {
-        DAOPersonagemHasCla daoPersonagemHasCla = new DAOPersonagemHasCla();
-        daoPersonagemHasCla.listarModoTexto();
-    }
 }
