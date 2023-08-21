@@ -41,6 +41,7 @@ import Entidades.Pais;
 import Entidades.Personagem;
 import Entidades.Raca;
 import javax.swing.JComboBox;
+import tools.DateTextField;
 
 /**
  *
@@ -87,7 +88,7 @@ public class PersonagemGUI extends JDialog {
     JTextField tfPeso = new JTextField(30);
 
     JLabel lbNascimento = new JLabel("Nascimento");
-    JTextField tfNascimento = new JTextField(30);
+    JTextField tfNascimento = new DateTextField();
 
     JLabel lbRaca = new JLabel("Raça");
     DAORaca daoRaca = new DAORaca();
@@ -298,15 +299,28 @@ public class PersonagemGUI extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 try {
                     cardLayout.show(pnSul, "avisos");
-                    personagem = daoPersonagem.obter(Integer.valueOf(tfIdPersonagem.getText()));
+                    personagem = daoPersonagem.obter(Integer.valueOf(tfId.getText()));
                     if (personagem != null) {//achou o cidade na lista
                         //mostrar
                         btAdicionar.setVisible(false);
                         btAlterar.setVisible(true);
                         btExcluir.setVisible(true);
                         btCancelar.setVisible(true);
+                        
                         tfNome_Personagem.setText(personagem.getNomePersonagem());
                         tfNome_Personagem.setEditable(false);
+                        
+                        tfIdade.setText(String.valueOf(personagem.getIdade()));
+                        tfIdade.setEditable(false);
+                        
+                        tfAltura.setText(String.valueOf(personagem.getAltura()));
+                        tfAltura.setEditable(false);
+                        
+                        tfPeso.setText(String.valueOf(personagem.getPeso()));
+                        tfPeso.setEditable(false);
+                        
+                        tfNascimento.setText(converteDatas.converteDeDateParaString(personagem.getNascimento()));
+                        tfNascimento.setEditable(false);
 
                         cbRaca.setSelectedItem(personagem.getRacaIdraca().toString().replace(";", "-"));
                         cbRaca.setEnabled(false);
@@ -334,9 +348,18 @@ public class PersonagemGUI extends JDialog {
                         btAdicionar.setVisible(true);
                         btAlterar.setVisible(false);
                         btExcluir.setVisible(false);
-                        tfIdPersonagem.setEditable(true);
+                        tfId.setEditable(true);
+                        
                         tfNome_Personagem.setText("");
                         tfNome_Personagem.setEditable(false);
+                        tfIdade.setText("");
+                        tfIdade.setEditable(false);
+                        tfAltura.setText("");
+                        tfAltura.setEditable(false);
+                        tfPeso.setText("");
+                        tfPeso.setEditable(false);
+                        tfNascimento.setText("");
+                        tfNascimento.setEditable(false);
 
                         cbRaca.setEnabled(false);
                         cbFiliacao.setEnabled(false);
@@ -356,10 +379,16 @@ public class PersonagemGUI extends JDialog {
         btAdicionar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                tfIdPersonagem.setEnabled(false);
-                tfIdPersonagem.setEditable(true);
+                tfId.setEnabled(false);
+                tfId.setEditable(true);
+                
                 tfNome_Personagem.requestFocus();
                 tfNome_Personagem.setEditable(true);
+                
+                tfIdade.setEditable(true);
+                tfAltura.setEditable(true);
+                tfPeso.setEditable(true);
+                tfNascimento.setEditable(true);
 
                 cbRaca.setEnabled(true);
                 cbFiliacao.setEnabled(true);
@@ -384,10 +413,12 @@ public class PersonagemGUI extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 try {
                     if (acao.equals("alterar")) {
-                        personagem.setIdpersonagem(Integer.valueOf(tfIdPersonagem.getText()));
+                        personagem.setIdpersonagem(Integer.valueOf(tfId.getText()));
                         personagem.setNomePersonagem(tfNome_Personagem.getText());
-                        personagem.setAltura(Double.valueOf());
-
+                        personagem.setAltura(Double.valueOf(tfAltura.getText()));
+                        personagem.setPeso(Integer.valueOf(tfPeso.getText()));
+                        personagem.setNascimento(converteDatas.converteDeStringParaDate(tfNascimento.getText()));
+                        
                         Raca selecionado = daoRaca.obter(Integer.valueOf(String.valueOf(cbRaca.getSelectedItem()).split("-")[0]));
                         personagem.setRacaIdraca(selecionado);
 
@@ -412,9 +443,12 @@ public class PersonagemGUI extends JDialog {
                         daoPersonagem.atualizar(personagem);
                     } else { //acao == adicionar
                         personagem = new Personagem();
-                        personagem.setIdpersonagem(Integer.valueOf(tfIdPersonagem.getText()));
+                        personagem.setIdpersonagem(Integer.valueOf(tfId.getText()));
                         personagem.setNomePersonagem(tfNome_Personagem.getText());
-                        personagem.setAltura(Double.valueOf());
+                        personagem.setAltura(Double.valueOf(tfAltura.getText()));
+                        personagem.setPeso(Integer.valueOf(tfPeso.getText()));
+                        personagem.setNascimento(converteDatas.converteDeStringParaDate(tfNascimento.getText()));
+
 
                         Raca selecionado = daoRaca.obter(Integer.valueOf(String.valueOf(cbRaca.getSelectedItem()).split("-")[0]));
                         personagem.setRacaIdraca(selecionado);
@@ -443,12 +477,26 @@ public class PersonagemGUI extends JDialog {
                     btCancelar.setVisible(false);
                     btBuscar.setVisible(true);
                     btListar.setVisible(true);
-                    tfIdPersonagem.setEnabled(true);
-                    tfIdPersonagem.setEditable(true);
-                    tfIdPersonagem.requestFocus();
-                    tfIdPersonagem.setText("");
+                    
+                    tfId.setEnabled(true);
+                    tfId.setEditable(true);
+                    tfId.requestFocus();
+                    tfId.setText("");
+                    
                     tfNome_Personagem.setText("");
                     tfNome_Personagem.setEditable(false);
+                    
+                    tfIdade.setText("");
+                    tfIdade.setEditable(false);
+                    
+                    tfAltura.setText("");
+                    tfAltura.setEditable(false);
+                    
+                    tfPeso.setText("");
+                    tfPeso.setEditable(false);
+                    
+                    tfNascimento.setText("");
+                    tfNascimento.setEditable(false);
 
                     cbRaca.setEnabled(false);
                     cbFiliacao.setEnabled(false);
@@ -469,9 +517,14 @@ public class PersonagemGUI extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 btBuscar.setVisible(false);
                 btAlterar.setVisible(false);
-                tfIdPersonagem.setEditable(false);
+                tfId.setEditable(false);
+                
                 tfNome_Personagem.requestFocus();
                 tfNome_Personagem.setEditable(true);
+                tfIdade.setEditable(true);
+                tfAltura.setEditable(true);
+                tfPeso.setEditable(true);
+                tfNascimento.setEditable(true);
 
                 cbRaca.setEnabled(true);
                 cbFiliacao.setEnabled(true);
@@ -498,12 +551,25 @@ public class PersonagemGUI extends JDialog {
                         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
                 btExcluir.setVisible(false);
-                tfIdPersonagem.setEditable(false);
-                tfIdPersonagem.requestFocus();
-                tfIdPersonagem.setText("");
-                tfIdPersonagem.setEditable(true);
+                tfId.setEditable(false);
+                tfId.requestFocus();
+                tfId.setText("");
+                tfId.setEditable(true);
+                
                 tfNome_Personagem.setText("");
                 tfNome_Personagem.setEditable(false);
+                
+                tfIdade.setText("");
+                tfIdade.setEditable(false);
+                
+                tfAltura.setText("");
+                tfAltura.setEditable(false);
+                
+                tfPeso.setText("");
+                tfPeso.setEditable(false);
+                
+                tfNascimento.setText("");
+                tfNascimento.setEditable(false);
 
                 cbRaca.setEnabled(false);
                 cbFiliacao.setEnabled(false);
@@ -552,10 +618,10 @@ public class PersonagemGUI extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 btCancelar.setVisible(false);
-                tfIdPersonagem.setText("");
-                tfIdPersonagem.requestFocus();
-                tfIdPersonagem.setEnabled(true);
-                tfIdPersonagem.setEditable(true);
+                tfId.setText("");
+                tfId.requestFocus();
+                tfId.setEnabled(true);
+                tfId.setEditable(true);
                 tfNome_Personagem.setText("");
                 tfNome_Personagem.setEditable(false);
 
