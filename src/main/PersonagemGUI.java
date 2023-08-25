@@ -33,7 +33,6 @@ import Entidades.Arma;
 import Entidades.Filiacao;
 import Entidades.Grade;
 import Entidades.Jujutsu;
-import Entidades.Pais;
 import Entidades.Personagem;
 import Entidades.Raca;
 import javax.swing.JComboBox;
@@ -583,7 +582,7 @@ public class PersonagemGUI extends JDialog {
         });
 
         setModal(true);
-        pack();
+        setSize(720, 480);
         setResizable(false);
         setLocationRelativeTo(null);//centraliza na tela
         setVisible(true);
