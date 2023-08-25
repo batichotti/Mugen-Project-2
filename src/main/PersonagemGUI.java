@@ -24,16 +24,12 @@ import java.awt.Container;
 import java.awt.CardLayout;
 import java.awt.FlowLayout;
 import tools.ConverteDatas;
-import DAOs.DAOCorCabelo;
-import DAOs.DAOCor_olhos;
 import DAOs.DAOFiliacao;
 import DAOs.DAOGrade;
 import DAOs.DAOJujutsu;
 import DAOs.DAOPersonagem;
 import DAOs.DAORaca;
 import Entidades.Arma;
-import Entidades.CorOlhos;
-import Entidades.CorCabelo;
 import Entidades.Filiacao;
 import Entidades.Grade;
 import Entidades.Jujutsu;
@@ -108,18 +104,6 @@ public class PersonagemGUI extends JDialog {
     Jujutsu jujutsu = new Jujutsu();
     JComboBox cbJujutsu = new JComboBox();
 
-    JLabel lbCorOlhos = new JLabel("Cor dos Olhos");
-    DAOCor_olhos daoCor_olhos = new DAOCor_olhos();
-    List<CorOlhos> cores_olhos = daoCor_olhos.listInOrderNome();
-    CorOlhos Cor_olhos = new CorOlhos();
-    JComboBox cbCor_olhos = new JComboBox();
-
-    JLabel lbCorCabelo = new JLabel("Cor do Cabelo");
-    DAOCorCabelo daoCorCabelo = new DAOCorCabelo();
-    List<CorCabelo> cores_cabelo = daoCorCabelo.listInOrderNome();
-    CorCabelo cor_cabelo = new CorCabelo();
-    JComboBox cbCorCabelo = new JComboBox();
-
     JLabel lbGrade = new JLabel("Grade");
     DAOGrade daoGrade = new DAOGrade();
     List<Grade> grades = daoGrade.listInOrderNome();
@@ -167,18 +151,6 @@ public class PersonagemGUI extends JDialog {
         }
 
         //Add combo box
-        for (CorOlhos cor_olhos_es : cores_olhos) {
-            String ditto = cor_olhos_es.toString().replace(";", "-");
-            cbCor_olhos.addItem(ditto);
-        }
-
-        //Add combo box
-        for (CorCabelo cor_cabelo_es : cores_cabelo) {
-            String ditto = cor_cabelo_es.toString().replace(";", "-");
-            cbCorCabelo.addItem(ditto);
-        }
-
-        //Add combo box
         for (Grade grade_es : grades) {
             String ditto = grade_es.toString().replace(";", "-");
             cbGrade.addItem(ditto);
@@ -204,8 +176,6 @@ public class PersonagemGUI extends JDialog {
         pnNorte.add(lbRaca);
         pnNorte.add(lbFiliacao);
         pnNorte.add(lbJujutsu);
-        pnNorte.add(lbCorOlhos);
-        pnNorte.add(lbCorCabelo);
         pnNorte.add(lbGrade);
         pnNorte.add(lbId);
 
@@ -258,12 +228,6 @@ public class PersonagemGUI extends JDialog {
         pnCentro.add(lbJujutsu);
         pnCentro.add(cbJujutsu);
 
-        pnCentro.add(lbCorOlhos);
-        pnCentro.add(cbCor_olhos);
-
-        pnCentro.add(lbCorCabelo);
-        pnCentro.add(cbCorCabelo);
-
         pnCentro.add(lbGrade);
         pnCentro.add(cbGrade);
 
@@ -281,15 +245,13 @@ public class PersonagemGUI extends JDialog {
         tabela.setEnabled(false);
 
         pnAvisos.add(new JLabel("Avisos"));
-        tfIdPersonagem.setEditable(true);
+        tfId.setEditable(true);
         tfNome_Personagem.setText("");
         tfNome_Personagem.setEditable(false);
 
         cbRaca.setEnabled(false);
         cbFiliacao.setEnabled(false);
         cbJujutsu.setEnabled(false);
-        cbCor_olhos.setEnabled(false);
-        cbCorCabelo.setEnabled(false);
         cbGrade.setEnabled(false);
         cbArma.setEnabled(false);
 
@@ -331,12 +293,6 @@ public class PersonagemGUI extends JDialog {
                         cbJujutsu.setSelectedItem(personagem.getJujutsuIdjujutsu().toString().replace(";", "-"));
                         cbJujutsu.setEnabled(false);
 
-                        cbCor_olhos.setSelectedItem(personagem.getCorOlhosIdcorOlhos().toString().replace(";", "-"));
-                        cbCor_olhos.setEnabled(false);
-
-                        cbCorCabelo.setSelectedItem(personagem.getCorCabeloIdcorCabelo().toString().replace(";", "-"));
-                        cbCorCabelo.setEnabled(false);
-
                         cbGrade.setSelectedItem(personagem.getGradeIdgrade().toString().replace(";", "-"));
                         cbGrade.setEnabled(false);
 
@@ -364,8 +320,6 @@ public class PersonagemGUI extends JDialog {
                         cbRaca.setEnabled(false);
                         cbFiliacao.setEnabled(false);
                         cbJujutsu.setEnabled(false);
-                        cbCor_olhos.setEnabled(false);
-                        cbCorCabelo.setEnabled(false);
                         cbGrade.setEnabled(false);
                         cbArma.setEnabled(false);
                     }
@@ -393,8 +347,6 @@ public class PersonagemGUI extends JDialog {
                 cbRaca.setEnabled(true);
                 cbFiliacao.setEnabled(true);
                 cbJujutsu.setEnabled(true);
-                cbCor_olhos.setEnabled(true);
-                cbCorCabelo.setEnabled(true);
                 cbGrade.setEnabled(true);
                 cbArma.setEnabled(true);
 
@@ -428,12 +380,6 @@ public class PersonagemGUI extends JDialog {
                         Jujutsu selecionado2 = daoJujutsu.obter(Integer.valueOf(String.valueOf(cbJujutsu.getSelectedItem()).split("-")[0]));
                         personagem.setJujutsuIdjujutsu(selecionado2);
 
-                        CorOlhos selecionado3 = daoCor_olhos.obter(Integer.valueOf(String.valueOf(cbCor_olhos.getSelectedItem()).split("-")[0]));
-                        personagem.setCorOlhosIdcorOlhos(selecionado3);
-
-                        CorCabelo selecionado4 = daoCorCabelo.obter(Integer.valueOf(String.valueOf(cbCorCabelo.getSelectedItem()).split("-")[0]));
-                        personagem.setCorCabeloIdcorCabelo(selecionado4);
-
                         Grade selecionado5 = daoGrade.obter(Integer.valueOf(String.valueOf(cbGrade.getSelectedItem()).split("-")[0]));
                         personagem.setGradeIdgrade(selecionado5);
 
@@ -458,12 +404,6 @@ public class PersonagemGUI extends JDialog {
 
                         Jujutsu selecionado2 = daoJujutsu.obter(Integer.valueOf(String.valueOf(cbJujutsu.getSelectedItem()).split("-")[0]));
                         personagem.setJujutsuIdjujutsu(selecionado2);
-
-                        CorOlhos selecionado3 = daoCor_olhos.obter(Integer.valueOf(String.valueOf(cbCor_olhos.getSelectedItem()).split("-")[0]));
-                        personagem.setCorOlhosIdcorOlhos(selecionado3);
-
-                        CorCabelo selecionado4 = daoCorCabelo.obter(Integer.valueOf(String.valueOf(cbCorCabelo.getSelectedItem()).split("-")[0]));
-                        personagem.setCorCabeloIdcorCabelo(selecionado4);
 
                         Grade selecionado5 = daoGrade.obter(Integer.valueOf(String.valueOf(cbGrade.getSelectedItem()).split("-")[0]));
                         personagem.setGradeIdgrade(selecionado5);
@@ -501,8 +441,6 @@ public class PersonagemGUI extends JDialog {
                     cbRaca.setEnabled(false);
                     cbFiliacao.setEnabled(false);
                     cbJujutsu.setEnabled(false);
-                    cbCor_olhos.setEnabled(false);
-                    cbCorCabelo.setEnabled(false);
                     cbGrade.setEnabled(false);
                     cbArma.setEnabled(false);
                 } catch (Exception macau1) {
@@ -529,8 +467,6 @@ public class PersonagemGUI extends JDialog {
                 cbRaca.setEnabled(true);
                 cbFiliacao.setEnabled(true);
                 cbJujutsu.setEnabled(true);
-                cbCor_olhos.setEnabled(true);
-                cbCorCabelo.setEnabled(true);
                 cbGrade.setEnabled(true);
                 cbArma.setEnabled(true);
 
@@ -574,8 +510,6 @@ public class PersonagemGUI extends JDialog {
                 cbRaca.setEnabled(false);
                 cbFiliacao.setEnabled(false);
                 cbJujutsu.setEnabled(false);
-                cbCor_olhos.setEnabled(false);
-                cbCorCabelo.setEnabled(false);
                 cbGrade.setEnabled(false);
                 cbArma.setEnabled(false);
 
@@ -628,8 +562,6 @@ public class PersonagemGUI extends JDialog {
                 cbRaca.setEnabled(false);
                 cbFiliacao.setEnabled(false);
                 cbJujutsu.setEnabled(false);
-                cbCor_olhos.setEnabled(false);
-                cbCorCabelo.setEnabled(false);
                 cbGrade.setEnabled(false);
                 cbArma.setEnabled(false);
 

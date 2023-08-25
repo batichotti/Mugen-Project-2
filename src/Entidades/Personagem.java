@@ -54,12 +54,6 @@ public class Personagem implements Serializable {
     @JoinColumn(name = "arma_idarma", referencedColumnName = "idarma")
     @ManyToOne(optional = false)
     private Arma armaIdarma;
-    @JoinColumn(name = "cor_cabelo_idcor_cabelo", referencedColumnName = "idcor_cabelo")
-    @ManyToOne(optional = false)
-    private CorCabelo corCabeloIdcorCabelo;
-    @JoinColumn(name = "cor_olhos_idcor_olhos", referencedColumnName = "idcor_olhos")
-    @ManyToOne(optional = false)
-    private CorOlhos corOlhosIdcorOlhos;
     @JoinColumn(name = "filiacao_idfiliacao", referencedColumnName = "idfiliacao")
     @ManyToOne(optional = false)
     private Filiacao filiacaoIdfiliacao;
@@ -136,22 +130,6 @@ public class Personagem implements Serializable {
         this.armaIdarma = armaIdarma;
     }
 
-    public CorCabelo getCorCabeloIdcorCabelo() {
-        return corCabeloIdcorCabelo;
-    }
-
-    public void setCorCabeloIdcorCabelo(CorCabelo corCabeloIdcorCabelo) {
-        this.corCabeloIdcorCabelo = corCabeloIdcorCabelo;
-    }
-
-    public CorOlhos getCorOlhosIdcorOlhos() {
-        return corOlhosIdcorOlhos;
-    }
-
-    public void setCorOlhosIdcorOlhos(CorOlhos corOlhosIdcorOlhos) {
-        this.corOlhosIdcorOlhos = corOlhosIdcorOlhos;
-    }
-
     public Filiacao getFiliacaoIdfiliacao() {
         return filiacaoIdfiliacao;
     }
@@ -206,7 +184,7 @@ public class Personagem implements Serializable {
 
     @Override
     public String toString() {
-        return idpersonagem + ";" + nomePersonagem + ";" + idade + ";" + altura + ";" + peso + ";" + nascimento + ";" + racaIdraca + ";" + filiacaoIdfiliacao + ";" + jujutsuIdjujutsu + ";" + corOlhosIdcorOlhos + ";" + corCabeloIdcorCabelo + ";" + gradeIdgrade + ";" + armaIdarma;
+        return idpersonagem + ";" + nomePersonagem + ";" + idade + ";" + altura + ";" + peso + ";" + nascimento + ";" + racaIdraca + ";" + filiacaoIdfiliacao + ";" + jujutsuIdjujutsu + ";" + gradeIdgrade + ";" + armaIdarma;
     }
     
 }

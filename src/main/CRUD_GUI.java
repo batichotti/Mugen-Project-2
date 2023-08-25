@@ -35,8 +35,6 @@ class CRUD_GUI extends JFrame {
 
     JButton btArma = new JButton("Arma");
     JButton btCla = new JButton("Clã");
-    JButton btCorCabelo = new JButton("Cor do Cabelo");
-    JButton btCorOlhos = new JButton("Cor dos olhos");
     JButton btFiliacao = new JButton("Filiação");
     JButton btGrade = new JButton("Grade");
     JButton btJujutsu = new JButton("Jujutsu");
@@ -90,20 +88,6 @@ class CRUD_GUI extends JFrame {
             }
         });
 
-        btCorCabelo.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Cor_CabeloGUI ccGUI = new Cor_CabeloGUI();
-            }
-        });
-
-        btCorOlhos.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Cor_OlhosGUI coGUI = new Cor_OlhosGUI();
-            }
-        });
-
         btFiliacao.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -154,13 +138,11 @@ class CRUD_GUI extends JFrame {
             }
         );
 
-        pnOeste.setLayout(new GridLayout(4, 3));
+        pnOeste.setLayout(new GridLayout(5, 2));
         pnOeste.add(btPlayer);
         pnOeste.add(btArma);
         pnOeste.add(btCla);
         pnOeste.add(btRaca);
-        pnOeste.add(btCorCabelo);
-        pnOeste.add(btCorOlhos);
         pnOeste.add(btFiliacao);
         pnOeste.add(btGrade);
         pnOeste.add(btJujutsu);
@@ -170,8 +152,6 @@ class CRUD_GUI extends JFrame {
         
         btArma.setBackground(Color.WHITE);
         btCla.setBackground(Color.WHITE);
-        btCorCabelo.setBackground(Color.WHITE);
-        btCorOlhos.setBackground(Color.WHITE);
         btFiliacao.setBackground(Color.WHITE);
         btGrade.setBackground(Color.WHITE);
         btJujutsu.setBackground(Color.WHITE);
