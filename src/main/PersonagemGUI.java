@@ -86,37 +86,44 @@ public class PersonagemGUI extends JDialog {
     JTextField tfNascimento = new DateTextField();
 
     JLabel lbRaca = new JLabel("Raça");
+    JPanel pnRaca = new JPanel();
+    JButton btRaca = new JButton("+");
     DAORaca daoRaca = new DAORaca();
     List<Raca> racas = daoRaca.listInOrderNome();
     Raca raca = new Raca();
     JComboBox cbRaca = new JComboBox();
 
     JLabel lbFiliacao = new JLabel("Filiação");
+    JPanel pnFiliacao = new JPanel();
+    JButton btFiliacao = new JButton("+");
     DAOFiliacao daoFiliacao = new DAOFiliacao();
     List<Filiacao> filiacoes = daoFiliacao.listInOrderNome();
     Filiacao filiacao = new Filiacao();
     JComboBox cbFiliacao = new JComboBox();
 
     JLabel lbJujutsu = new JLabel("Jujutsu");
+    JPanel pnJujutsu = new JPanel();
+    JButton btJujutsu = new JButton("+");
     DAOJujutsu daoJujutsu = new DAOJujutsu();
     List<Jujutsu> jujutsus = daoJujutsu.listInOrderNome();
     Jujutsu jujutsu = new Jujutsu();
     JComboBox cbJujutsu = new JComboBox();
 
     JLabel lbGrade = new JLabel("Grade");
+    JPanel pnGrade = new JPanel();
+    JButton btGrade = new JButton("+");
     DAOGrade daoGrade = new DAOGrade();
     List<Grade> grades = daoGrade.listInOrderNome();
     Grade grade = new Grade();
     JComboBox cbGrade = new JComboBox();
 
     JLabel lbArma = new JLabel("Arma");
+    JPanel pnArma = new JPanel();
+    JButton btArma = new JButton("+");
     DAOArma daoArma = new DAOArma();
     List<Arma> armas = daoArma.listInOrderNome();
     Arma arma = new Arma();
     JComboBox cbArma = new JComboBox();
-
-    JLabel lbNome_cidade = new JLabel("Name");
-    JTextField tfNome_Personagem = new JTextField(25);
 
     DAOPersonagem daoPersonagem = new DAOPersonagem();
 
@@ -129,37 +136,72 @@ public class PersonagemGUI extends JDialog {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         cp = getContentPane();
         cp.setLayout(new BorderLayout());
-        setTitle("CRUD - Cidade");
+        setTitle("CRUD - Personagem");
 
         //Add combo box
         for (Raca raca_es : racas) {
-            String ditto = raca_es.toString().replace(";", "-");
+            String ditto = raca_es.toString().split(";")[0] + " - " + raca_es.toString().split(";")[1];
             cbRaca.addItem(ditto);
         }
 
         //Add combo box
         for (Filiacao filiacao_es : filiacoes) {
-            String ditto = filiacao_es.toString().replace(";", "-");
+            String ditto = filiacao_es.toString().split(";")[0] + " - " + filiacao_es.toString().split(";")[1];
             cbFiliacao.addItem(ditto);
         }
 
         //Add combo box
         for (Jujutsu jujutsu_es : jujutsus) {
-            String ditto = jujutsu_es.toString().replace(";", "-");
+            String ditto = jujutsu_es.toString().split(";")[0] + " - " + jujutsu_es.toString().split(";")[1];
             cbJujutsu.addItem(ditto);
         }
 
         //Add combo box
         for (Grade grade_es : grades) {
-            String ditto = grade_es.toString().replace(";", "-");
+            String ditto = grade_es.toString().split(";")[0] + " - " + grade_es.toString().split(";")[1];
             cbGrade.addItem(ditto);
         }
 
         //Add combo box
         for (Arma arma_es : armas) {
-            String ditto = arma_es.toString().replace(";", "-");
+            String ditto = arma_es.toString().split(";")[0] + " - " + arma_es.toString().split(";")[1];
             cbArma.addItem(ditto);
         }
+        
+        btArma.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ArmaGUI armaGUI = new ArmaGUI();
+            }
+        });
+        
+        btFiliacao.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FiliacaoGUI filiacaoGUI = new FiliacaoGUI();
+            }
+        });
+
+        btGrade.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GradeGUI gradeGUI = new GradeGUI();
+            }
+        });
+
+        btJujutsu.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JujutsuGUI jjtGUI = new JujutsuGUI();
+            }
+        });
+
+        btRaca.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                RacaGUI racaGUI = new RacaGUI();
+            }
+        });
 
         cp.add(pnNorte, BorderLayout.NORTH);
         cp.add(pnCentro, BorderLayout.CENTER);
@@ -171,13 +213,7 @@ public class PersonagemGUI extends JDialog {
         pnNorte.setLayout(new FlowLayout(FlowLayout.LEFT));
         pnNorte.add(lbId);
         pnNorte.add(tfId);
-
-        pnNorte.add(lbRaca);
-        pnNorte.add(lbFiliacao);
-        pnNorte.add(lbJujutsu);
-        pnNorte.add(lbGrade);
-        pnNorte.add(lbId);
-
+        
         pnNorte.add(btBuscar);
         pnNorte.add(btAdicionar);
         pnNorte.add(btAlterar);
@@ -201,37 +237,71 @@ public class PersonagemGUI extends JDialog {
         btAlterar.setBackground(Color.WHITE);
         btExcluir.setBackground(Color.WHITE);
         btCancelar.setBackground(Color.WHITE);
+        
+        btArma.setBackground(Color.WHITE);
+        btFiliacao.setBackground(Color.WHITE);
+        btGrade.setBackground(Color.WHITE);
+        btJujutsu.setBackground(Color.WHITE);
+        btRaca.setBackground(Color.WHITE);        
+        
         pnCentro.setLayout(new GridLayout(colunas.length - 1, 2));
         
         pnCentro.add(lbNome);
         pnCentro.add(tfNome);
+        tfNome.setEditable(false);
         
         pnCentro.add(lbIdade);
         pnCentro.add(tfIdade);
+        tfIdade.setEditable(false);
         
         pnCentro.add(lbAltura);
         pnCentro.add(tfAltura);
+        tfAltura.setEditable(false);
         
         pnCentro.add(lbPeso);
         pnCentro.add(tfPeso);
+        tfPeso.setEditable(false);
         
         pnCentro.add(lbNascimento);
         pnCentro.add(tfNascimento);
-
-        pnCentro.add(lbRaca);
+        tfNascimento.setEditable(false);
+        
+        //cbs
+        pnRaca.setLayout(new BorderLayout());
+        pnCentro.add(pnRaca);
         pnCentro.add(cbRaca);
 
-        pnCentro.add(lbFiliacao);
+        pnFiliacao.setLayout(new BorderLayout());
+        pnCentro.add(pnFiliacao);
         pnCentro.add(cbFiliacao);
 
-        pnCentro.add(lbJujutsu);
+        pnJujutsu.setLayout(new BorderLayout());
+        pnCentro.add(pnJujutsu);
         pnCentro.add(cbJujutsu);
 
-        pnCentro.add(lbGrade);
+        pnGrade.setLayout(new BorderLayout());
+        pnCentro.add(pnGrade);
         pnCentro.add(cbGrade);
 
-        pnCentro.add(lbArma);
+        pnArma.setLayout(new BorderLayout());
+        pnCentro.add(pnArma);
         pnCentro.add(cbArma);
+        
+        //configurar paineis
+        pnRaca.add(lbRaca, BorderLayout.WEST);
+        pnRaca.add(btRaca, BorderLayout.EAST);
+        
+        pnFiliacao.add(lbFiliacao, BorderLayout.WEST);
+        pnFiliacao.add(btFiliacao, BorderLayout.EAST);
+        
+        pnJujutsu.add(lbJujutsu, BorderLayout.WEST);
+        pnJujutsu.add(btJujutsu, BorderLayout.EAST);
+        
+        pnGrade.add(lbGrade, BorderLayout.WEST);
+        pnGrade.add(btGrade, BorderLayout.EAST);
+        
+        pnArma.add(lbArma, BorderLayout.WEST);
+        pnArma.add(btArma, BorderLayout.EAST);
 
         cardLayout = new CardLayout();
         pnSul.setLayout(cardLayout);
@@ -245,8 +315,8 @@ public class PersonagemGUI extends JDialog {
 
         pnAvisos.add(new JLabel("Avisos"));
         tfId.setEditable(true);
-        tfNome_Personagem.setText("");
-        tfNome_Personagem.setEditable(false);
+        tfNome.setText("");
+        tfNome.setEditable(false);
 
         cbRaca.setEnabled(false);
         cbFiliacao.setEnabled(false);
@@ -268,8 +338,8 @@ public class PersonagemGUI extends JDialog {
                         btExcluir.setVisible(true);
                         btCancelar.setVisible(true);
                         
-                        tfNome_Personagem.setText(personagem.getNomePersonagem());
-                        tfNome_Personagem.setEditable(false);
+                        tfNome.setText(personagem.getNomePersonagem());
+                        tfNome.setEditable(false);
                         
                         tfIdade.setText(String.valueOf(personagem.getIdade()));
                         tfIdade.setEditable(false);
@@ -305,8 +375,8 @@ public class PersonagemGUI extends JDialog {
                         btExcluir.setVisible(false);
                         tfId.setEditable(true);
                         
-                        tfNome_Personagem.setText("");
-                        tfNome_Personagem.setEditable(false);
+                        tfNome.setText("");
+                        tfNome.setEditable(false);
                         tfIdade.setText("");
                         tfIdade.setEditable(false);
                         tfAltura.setText("");
@@ -335,8 +405,8 @@ public class PersonagemGUI extends JDialog {
                 tfId.setEnabled(false);
                 tfId.setEditable(true);
                 
-                tfNome_Personagem.requestFocus();
-                tfNome_Personagem.setEditable(true);
+                tfNome.requestFocus();
+                tfNome.setEditable(true);
                 
                 tfIdade.setEditable(true);
                 tfAltura.setEditable(true);
@@ -365,49 +435,49 @@ public class PersonagemGUI extends JDialog {
                 try {
                     if (acao.equals("alterar")) {
                         personagem.setIdpersonagem(Integer.valueOf(tfId.getText()));
-                        personagem.setNomePersonagem(tfNome_Personagem.getText());
+                        personagem.setNomePersonagem(tfNome.getText());
                         personagem.setAltura(Double.valueOf(tfAltura.getText()));
                         personagem.setPeso(Integer.valueOf(tfPeso.getText()));
                         personagem.setNascimento(converteDatas.converteDeStringParaDate(tfNascimento.getText()));
                         
-                        Raca selecionado = daoRaca.obter(Integer.valueOf(String.valueOf(cbRaca.getSelectedItem()).split("-")[0]));
+                        Raca selecionado = daoRaca.obter(Integer.valueOf(String.valueOf(cbRaca.getSelectedItem()).split(" - ")[0]));
                         personagem.setRacaIdraca(selecionado);
 
-                        Filiacao selecionado1 = daoFiliacao.obter(Integer.valueOf(String.valueOf(cbFiliacao.getSelectedItem()).split("-")[0]));
+                        Filiacao selecionado1 = daoFiliacao.obter(Integer.valueOf(String.valueOf(cbFiliacao.getSelectedItem()).split(" - ")[0]));
                         personagem.setFiliacaoIdfiliacao(selecionado1);
 
-                        Jujutsu selecionado2 = daoJujutsu.obter(Integer.valueOf(String.valueOf(cbJujutsu.getSelectedItem()).split("-")[0]));
+                        Jujutsu selecionado2 = daoJujutsu.obter(Integer.valueOf(String.valueOf(cbJujutsu.getSelectedItem()).split(" - ")[0]));
                         personagem.setJujutsuIdjujutsu(selecionado2);
 
-                        Grade selecionado5 = daoGrade.obter(Integer.valueOf(String.valueOf(cbGrade.getSelectedItem()).split("-")[0]));
+                        Grade selecionado5 = daoGrade.obter(Integer.valueOf(String.valueOf(cbGrade.getSelectedItem()).split(" - ")[0]));
                         personagem.setGradeIdgrade(selecionado5);
 
-                        Arma selecionado6 = daoArma.obter(Integer.valueOf(String.valueOf(cbArma.getSelectedItem()).split("-")[0]));
+                        Arma selecionado6 = daoArma.obter(Integer.valueOf(String.valueOf(cbArma.getSelectedItem()).split(" - ")[0]));
                         personagem.setArmaIdarma(selecionado6);
 
                         daoPersonagem.atualizar(personagem);
                     } else { //acao == adicionar
                         personagem = new Personagem();
                         personagem.setIdpersonagem(Integer.valueOf(tfId.getText()));
-                        personagem.setNomePersonagem(tfNome_Personagem.getText());
+                        personagem.setNomePersonagem(tfNome.getText());
                         personagem.setAltura(Double.valueOf(tfAltura.getText()));
                         personagem.setPeso(Integer.valueOf(tfPeso.getText()));
                         personagem.setNascimento(converteDatas.converteDeStringParaDate(tfNascimento.getText()));
 
 
-                        Raca selecionado = daoRaca.obter(Integer.valueOf(String.valueOf(cbRaca.getSelectedItem()).split("-")[0]));
+                        Raca selecionado = daoRaca.obter(Integer.valueOf(String.valueOf(cbRaca.getSelectedItem()).split(" - ")[0]));
                         personagem.setRacaIdraca(selecionado);
 
-                        Filiacao selecionado1 = daoFiliacao.obter(Integer.valueOf(String.valueOf(cbFiliacao.getSelectedItem()).split("-")[0]));
+                        Filiacao selecionado1 = daoFiliacao.obter(Integer.valueOf(String.valueOf(cbFiliacao.getSelectedItem()).split(" - ")[0]));
                         personagem.setFiliacaoIdfiliacao(selecionado1);
 
-                        Jujutsu selecionado2 = daoJujutsu.obter(Integer.valueOf(String.valueOf(cbJujutsu.getSelectedItem()).split("-")[0]));
+                        Jujutsu selecionado2 = daoJujutsu.obter(Integer.valueOf(String.valueOf(cbJujutsu.getSelectedItem()).split(" - ")[0]));
                         personagem.setJujutsuIdjujutsu(selecionado2);
 
-                        Grade selecionado5 = daoGrade.obter(Integer.valueOf(String.valueOf(cbGrade.getSelectedItem()).split("-")[0]));
+                        Grade selecionado5 = daoGrade.obter(Integer.valueOf(String.valueOf(cbGrade.getSelectedItem()).split(" - ")[0]));
                         personagem.setGradeIdgrade(selecionado5);
 
-                        Arma selecionado6 = daoArma.obter(Integer.valueOf(String.valueOf(cbArma.getSelectedItem()).split("-")[0]));
+                        Arma selecionado6 = daoArma.obter(Integer.valueOf(String.valueOf(cbArma.getSelectedItem()).split(" - ")[0]));
                         personagem.setArmaIdarma(selecionado6);;
 
                         daoPersonagem.inserir(personagem);
@@ -422,8 +492,8 @@ public class PersonagemGUI extends JDialog {
                     tfId.requestFocus();
                     tfId.setText("");
                     
-                    tfNome_Personagem.setText("");
-                    tfNome_Personagem.setEditable(false);
+                    tfNome.setText("");
+                    tfNome.setEditable(false);
                     
                     tfIdade.setText("");
                     tfIdade.setEditable(false);
@@ -443,7 +513,7 @@ public class PersonagemGUI extends JDialog {
                     cbGrade.setEnabled(false);
                     cbArma.setEnabled(false);
                 } catch (Exception macau1) {
-                    JOptionPane.showMessageDialog(null, "Algo deu errado - btSalvar: " + macau1);
+                    JOptionPane.showMessageDialog(null, "Algo deu errado ao salvar: " + macau1);
                 }
             }
         });
@@ -456,8 +526,8 @@ public class PersonagemGUI extends JDialog {
                 btAlterar.setVisible(false);
                 tfId.setEditable(false);
                 
-                tfNome_Personagem.requestFocus();
-                tfNome_Personagem.setEditable(true);
+                tfNome.requestFocus();
+                tfNome.setEditable(true);
                 tfIdade.setEditable(true);
                 tfAltura.setEditable(true);
                 tfPeso.setEditable(true);
@@ -491,8 +561,8 @@ public class PersonagemGUI extends JDialog {
                 tfId.setText("");
                 tfId.setEditable(true);
                 
-                tfNome_Personagem.setText("");
-                tfNome_Personagem.setEditable(false);
+                tfNome.setText("");
+                tfNome.setEditable(false);
                 
                 tfIdade.setText("");
                 tfIdade.setEditable(false);
@@ -524,7 +594,7 @@ public class PersonagemGUI extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 List<Personagem> listaCidade = daoPersonagem.listInOrderNome();
-                String[] colunas = new String[]{"id", "Name", "País"};
+                String[] colunas = new String[]{"id", "Name", "idade", "altura", "peso", "nascimento"};
                 String[][] dados = new String[listaCidade.size()][colunas.length];
                 String aux[];
                 for (int i = 0; i < listaCidade.size(); i++) {
@@ -555,9 +625,22 @@ public class PersonagemGUI extends JDialog {
                 tfId.requestFocus();
                 tfId.setEnabled(true);
                 tfId.setEditable(true);
-                tfNome_Personagem.setText("");
-                tfNome_Personagem.setEditable(false);
-
+                
+                tfNome.setText("");
+                tfNome.setEditable(false);
+                
+                tfIdade.setText("");
+                tfIdade.setEditable(false);
+                
+                tfAltura.setText("");
+                tfAltura.setEditable(false);
+                
+                tfPeso.setText("");
+                tfPeso.setEditable(false);
+                
+                tfNascimento.setText("");
+                tfNascimento.setEditable(false);
+                
                 cbRaca.setEnabled(false);
                 cbFiliacao.setEnabled(false);
                 cbJujutsu.setEnabled(false);
