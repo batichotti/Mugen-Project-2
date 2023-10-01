@@ -168,10 +168,12 @@ public class PersonagemGUI extends JDialog {
             cbArma.addItem(ditto);
         }
         
+        //buttons
         btArma.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ArmaGUI armaGUI = new ArmaGUI();
+                dispose();
             }
         });
         
@@ -179,6 +181,7 @@ public class PersonagemGUI extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 FiliacaoGUI filiacaoGUI = new FiliacaoGUI();
+                dispose();
             }
         });
 
@@ -186,6 +189,7 @@ public class PersonagemGUI extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 GradeGUI gradeGUI = new GradeGUI();
+                dispose();
             }
         });
 
@@ -193,6 +197,7 @@ public class PersonagemGUI extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JujutsuGUI jjtGUI = new JujutsuGUI();
+                dispose();
             }
         });
 
@@ -200,6 +205,7 @@ public class PersonagemGUI extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 RacaGUI racaGUI = new RacaGUI();
+                dispose();
             }
         });
 
