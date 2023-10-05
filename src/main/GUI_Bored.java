@@ -1,5 +1,6 @@
-package entity;
+package main;
 
+import entity.API_Getter;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
@@ -25,7 +26,7 @@ import tools.Musicas;
  *
  * @author Mateus CohuzEr
  */
-class GUI_Bored extends JDialog {
+public class GUI_Bored extends JDialog {
 
     Container cp;
     API_Getter apiget;

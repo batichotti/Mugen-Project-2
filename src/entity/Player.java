@@ -1,5 +1,6 @@
 package entity;
 
+import main.GUI_Bored;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;

@@ -4,6 +4,8 @@ import Entidades.PersonagemHasCla;
 import Entidades.PersonagemHasClaPK;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -18,15 +20,17 @@ public class DAOPersonagemHasCla extends DAOGenerico<PersonagemHasCla> {
     }
 
     //busca com PK composta
-    public PersonagemHasCla obter(PersonagemHasClaPK personagemHasClaPk){
-        return em.find(PersonagemHasCla.class, personagemHasClaPk);
-    }
-    
-    public List<PersonagemHasCla> listInOrderNome(){
-        return em.createQuery("SELECT e FROM PersonagemHasCla e ORDER BY e.personagemHasCla").getResultList();
+    public PersonagemHasCla obter(PersonagemHasClaPK phcpk) {
+        return em.find(PersonagemHasCla.class, phcpk);
     }
 
-    public List<String> listInOrderNomeStrings(){
+    public List<PersonagemHasCla> listInOrderNome() {
+        TypedQuery<PersonagemHasCla> query = em.createQuery("SELECT e FROM PersonagemHasCla e ORDER BY e.escopo", PersonagemHasCla.class);
+        List<PersonagemHasCla> resultList = query.getResultList();
+        return resultList;
+    }
+
+    public List<String> listInOrderNomeStrings() {
         List<PersonagemHasCla> lf = listInOrderNome();
         List<String> ls = new ArrayList<>();
         for (int i = 0; i < lf.size(); i++) {
