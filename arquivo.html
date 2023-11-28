@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Ficha de Personagem - Jujutsu Kaisen</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Homemade+Apple');
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600');
+
+        @font-face {
+            font-family: 'Jujutsu Kaisen';
+            src: url('/ficha/Jujutsu_Kaisen.ttf');
+        }
+
+        body {
+            font-family: 'Jujutsu Kaisen', 'Homemade Apple', cursive;
+            background-color: #ffffff;
+            color: #333;
+            margin: 20px;
+            font-size: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 30px;
+        }
+
+        h2 {
+            font-size: 20px;
+            align-self: center;
+        }
+
+        p {
+            font-family: 'Homemade Apple', cursive;
+        }
+
+        header {
+            text-align: center;
+            color: #ff5555;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        section {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .character-info {
+            flex: 1 1 calc(50% - 10px);
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+            background-color: #e7e7e7;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 20px;
+        }
+
+        .character-info>div {
+            margin-bottom: 5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #000000;
+        }
+
+        p {
+            padding: 7px;
+            margin-bottom: 10px;
+            background-color: #f5f5f5;
+            border: 1px solid #a8a8a8;
+            border-radius: 4px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #808080;
+            width: 71%;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .name{
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 16px;
+        }
+
+        @media (max-width: 768px) {
+            section {
+                flex-direction: column;
+            }
+
+            .character-info {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Ficha de Personagem - Mugen Project</h1>
+    </header>
+
+    <div class="container">
+
+        <section style="width: 100%;">
+            <div class="character-info">
+                <div>
+                    <label for="name">Nome:</label>
+                    <p name="name">Cohuzer  Fushiguro  Inumaki</p>
+                </div>
+
+                <div>
+                    <label for="age">Idade:</label>
+                    <p name="age">18</p>
+                </div>
+
+                <div>
+                    <label for="height">Altura (cm):</label>
+                    <p name="height">177.0</p>
+                </div>
+
+                <div >
+                    <label for="weight">Peso (kg):</label>
+                    <p name="weight">94</p>
+                </div>
+
+                <div>
+                    <label for="race">Raca:</label>
+                    <p name="race"> Humano</p>
+                </div>
+
+                <div>
+                    <label for="parentage">Filiacao:</label>
+                    <p name="parentage"> Fushiguro e  Inumaki</p>
+                </div>
+
+                <div>
+                    <label for="curse-type">Tipo de Maldicao:</label>
+                    <p name="curse-type"> Dismantle</p>
+                </div>
+
+                <div>
+                    <label for="grade">Grade:</label>
+                    <p name="grade"> Grau 1</p>
+                </div>
+
+                <div>
+                    <label for="weapon">Arma:</label>
+                    <p name="weapon"> revolver</p>
+                </div>
+            </div>
+        </section>
+
+        <div style="width: 2%;"></div>
+
+        <div style="width: 100%; display: flex; flex-direction: row;">
+            <section style="height: 50%;">
+                <div class="character-info">
+                    <h2>Aparencia</h2>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+
+                </div>
+            </section>
+
+            <section style="height: 50%;">
+                <div class="character-info">
+                    <h2>Historia e Detalhes</h2>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+
+                </div>
+            </section>
+        </div>
+    </div>
+    <footer class="text-muted">
+        <p class="name">&copy; 2023 Mateus Batichotti 'Cohuzer' Silva</p>
+    </footer>
+</body>
+</html>

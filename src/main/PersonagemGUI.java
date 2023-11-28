@@ -44,7 +44,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import tools.DateTextField;
+import tools.HtmlToPdfConverter;
+import tools.ManipulaArquivo;
+import tools.ManipuladorArquivosHTML;
 
 /**
  *
@@ -64,6 +69,7 @@ public class PersonagemGUI extends JDialog {
     JButton btExcluir = new JButton("Excluir");
     JButton btListar = new JButton("Listar");
     JButton btCancelar = new JButton("Cancelar");
+    JButton btFicha = new JButton("Gerar Ficha");
     String acao = "";
     private JScrollPane scrollTabela = new JScrollPane();
 
@@ -243,6 +249,53 @@ public class PersonagemGUI extends JDialog {
             }
         });
 
+        btFicha.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    HtmlToPdfConverter htmlToPdfConverter = new HtmlToPdfConverter();
+
+                    ManipulaArquivo manipulaArquivo = new ManipulaArquivo();
+                    String diretorio = "D:\\documentos\\GitHub\\Mugen-Project-2";
+
+                    ManipuladorArquivosHTML manipuladorArquivosHTML = new ManipuladorArquivosHTML(diretorio);
+
+                    String nome = tfNome.getText();
+                    if (String.valueOf(cbCla2.getSelectedItem().toString().split("-")[1].strip()).equals("Nenhum")) {
+                        nome = tfNome.getText() + " " + cbCla1.getSelectedItem().toString().split("-")[1];
+                    } else {
+                        nome = tfNome.getText() + " " + cbCla1.getSelectedItem().toString().split("-")[1] + " " + cbCla2.getSelectedItem().toString().split("-")[1];
+                    }
+                    
+                    String idade = String.valueOf(daoPersonagem.obter(Integer.valueOf(tfId.getText())).getIdade());
+                    String altura = tfAltura.getText();
+                    String peso = tfPeso.getText();
+                    String raca_ = cbRaca.getSelectedItem().toString().split("-")[1];
+
+                    String filiacao_ = "";
+                    if (String.valueOf(cbCla2.getSelectedItem().toString().split("-")[1].strip()).equals("Nenhum")) {
+                        filiacao_ = cbCla1.getSelectedItem().toString().split("-")[1];
+                    } else {
+                        filiacao_ = cbCla1.getSelectedItem().toString().split("-")[1] + " e " + cbCla2.getSelectedItem().toString().split("-")[1];
+                    }
+
+                    String jujutsu_ = cbJujutsu.getSelectedItem().toString().split("-")[1];
+                    String grade_ = cbGrade.getSelectedItem().toString().split("-")[1];
+                    String arma_ = cbArma.getSelectedItem().toString().split("-")[1];
+
+                    manipuladorArquivosHTML.main(nome, idade, altura, peso, raca_, filiacao_, jujutsu_, grade_, arma_);
+
+                    String outputPath = "D:\\documentos\\GitHub\\Mugen-Project-2\\";
+
+                    htmlToPdfConverter.main(outputPath);
+                    //manipuladorArquivosHTML.excluirArquivo("arquivo.html");
+                    JOptionPane.showMessageDialog(null, "Arquivo criado na área de trabalho");
+                } catch (Exception ibisa) {
+                    JOptionPane.showMessageDialog(null, "Algo deu errado:" + ibisa);
+                }
+            }
+        });
+
         cp.add(pnNorte, BorderLayout.NORTH);
         cp.add(pnCentro, BorderLayout.CENTER);
         cp.add(pnSul, BorderLayout.SOUTH);
@@ -255,6 +308,7 @@ public class PersonagemGUI extends JDialog {
         pnNorte.add(tfId);
 
         pnNorte.add(btBuscar);
+        pnNorte.add(btFicha);
         pnNorte.add(btAdicionar);
         pnNorte.add(btAlterar);
         pnNorte.add(btExcluir);
@@ -266,6 +320,7 @@ public class PersonagemGUI extends JDialog {
         tfId.setVisible(true);
         btSalvar.setVisible(false);
         btAdicionar.setVisible(false);
+        btFicha.setVisible(false);
         btAlterar.setVisible(false);
         btExcluir.setVisible(false);
         btCancelar.setVisible(false);
@@ -274,6 +329,7 @@ public class PersonagemGUI extends JDialog {
         btBuscar.setBackground(Color.WHITE);
         btListar.setBackground(Color.WHITE);
         btAdicionar.setBackground(Color.WHITE);
+        btFicha.setBackground(Color.WHITE);
         btAlterar.setBackground(Color.WHITE);
         btExcluir.setBackground(Color.WHITE);
         btCancelar.setBackground(Color.WHITE);
@@ -383,6 +439,7 @@ public class PersonagemGUI extends JDialog {
                     if (personagem != null) {//achou o cidade na lista
                         //mostrar
                         btAdicionar.setVisible(false);
+                        btFicha.setVisible(true);
                         btAlterar.setVisible(true);
                         btExcluir.setVisible(true);
                         btCancelar.setVisible(true);
@@ -436,6 +493,7 @@ public class PersonagemGUI extends JDialog {
                         //mostrar botão incluir
 
                         btAdicionar.setVisible(true);
+                        btFicha.setVisible(false);
                         btAlterar.setVisible(false);
                         btExcluir.setVisible(false);
                         tfId.setEditable(true);
@@ -486,6 +544,7 @@ public class PersonagemGUI extends JDialog {
                 cbCla2.setEnabled(true);
 
                 btAdicionar.setVisible(false);
+                btFicha.setVisible(false);
                 btSalvar.setVisible(true);
                 btCancelar.setVisible(true);
                 btBuscar.setVisible(false);
@@ -594,7 +653,7 @@ public class PersonagemGUI extends JDialog {
                         String anoString = formatoAno.format(dataAtual);
                         int anoAtual = Integer.parseInt(anoString);
                         personagem.setIdade(anoAtual - Integer.parseInt(tfNascimento.getText().split("/")[2]));
-                        
+
                         Raca selecionado = daoRaca.obter(Integer.valueOf(String.valueOf(cbRaca.getSelectedItem()).split(" - ")[0]));
                         personagem.setRacaIdraca(selecionado);
 
@@ -669,7 +728,7 @@ public class PersonagemGUI extends JDialog {
                     cbArma.setEnabled(false);
                     cbCla1.setEnabled(false);
                     cbCla2.setEnabled(false);
-                    
+
                     dispose();
                 } catch (Exception macau1) {
                     JOptionPane.showMessageDialog(null, "Algo deu errado ao salvar: " + macau1);
@@ -684,6 +743,7 @@ public class PersonagemGUI extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 btBuscar.setVisible(false);
                 btAlterar.setVisible(false);
+                btFicha.setVisible(false);
                 tfId.setEditable(false);
 
                 tfNome.requestFocus();
@@ -744,10 +804,11 @@ public class PersonagemGUI extends JDialog {
                 cbCla2.setEnabled(false);
 
                 btAlterar.setVisible(false);
+                btFicha.setVisible(false);
                 btCancelar.setVisible(false);
                 if (response == JOptionPane.YES_OPTION) {
                     PersonagemHasCla phc = new PersonagemHasCla();
-                    for (PersonagemHasCla pk: lista_pks) {
+                    for (PersonagemHasCla pk : lista_pks) {
                         if (pk.getPersonagemHasClaPK().getPersonagemIdpersonagem() == personagem.getIdpersonagem()) {
                             PersonagemHasClaPK alguemmemata = new PersonagemHasClaPK();
                             alguemmemata.setClaIdcla(pk.getPersonagemHasClaPK().getClaIdcla());
@@ -758,7 +819,7 @@ public class PersonagemGUI extends JDialog {
                             }
                         }
                     }
-                    
+
                     daoPersonagem.remover(personagem);
                 }
             }
@@ -787,6 +848,7 @@ public class PersonagemGUI extends JDialog {
                 btAlterar.setVisible(false);
                 btExcluir.setVisible(false);
                 btAdicionar.setVisible(false);
+                btFicha.setVisible(false);
 
             }
         });
@@ -839,7 +901,7 @@ public class PersonagemGUI extends JDialog {
         });
 
         setModal(true);
-        setSize(720, 480);
+        setSize(840, 560);
         setResizable(false);
         setLocationRelativeTo(null);//centraliza na tela
         setVisible(true);

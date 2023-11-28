@@ -14,11 +14,11 @@ import org.xhtmlrenderer.pdf.ITextRenderer;
 
 public class HtmlToPdfConverter {
 
-    public static void main(String[] args) {
+    public static void main(String outputPath) {
         try {
-            String htmlContent = new String(Files.readAllBytes(Paths.get("D:\\desktop\\Geral\\Java\\Mugen_Project\\ficha\\ficha.html")));
+            String htmlContent = new String(Files.readAllBytes(Paths.get("D:\\documentos\\GitHub\\Mugen-Project-2\\arquivo.html")));
 
-            String outputPath = "D:\\desktop\\Geral\\Java\\Mugen_Project\\ficha\\output.pdf";
+            outputPath = "D:\\desktop\\ficha.pdf";
 
             convertHtmlToPdf(htmlContent, outputPath);
 
@@ -47,11 +47,6 @@ public class HtmlToPdfConverter {
             renderer.layout();
             renderer.createPDF(os);
             System.out.println("Done");
-//            renderer.setDocumentFromString(htmlContent);
-//            renderer.layout();
-//            String fontPath = "D:\\desktop\\Geral\\Java\\Mugen_Project\\ficha\\Jujutsu_Kaisen.ttf";
-//            renderer.getFontResolver().addFont(fontPath, true);
-//            renderer.createPDF(os, true);
         }
     }
 }
