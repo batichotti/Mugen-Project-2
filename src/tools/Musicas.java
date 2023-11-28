@@ -9,14 +9,14 @@ public class Musicas {
     public void playBGM() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 
         try {
-            File file = new File("D:\\Mateus Cohuzer\\Desktop\\Geral\\Java\\Mugen_Project\\src\\res\\musics\\start.wav");
+            File file = new File("D:\\documentos\\GitHub\\Mugen-Project-2\\src\\res\\musics\\start.wav");
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
             Clip clip = AudioSystem.getClip();
             clip.open(audioStream);
             
             clip.start();
             
-            file = new File("D:\\Mateus Cohuzer\\Desktop\\Geral\\Java\\Mugen_Project\\src\\res\\musics\\bgm.wav");
+            file = new File("D:\\documentos\\GitHub\\Mugen-Project-2\\src\\res\\musics\\bgm.wav");
             audioStream = AudioSystem.getAudioInputStream(file);
             clip = AudioSystem.getClip();
             clip.open(audioStream);
@@ -27,11 +27,11 @@ public class Musicas {
             System.out.println("Archive not founded (music)");
         }
     }
-    
+
     public void playBGM2() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 
         try {
-            File file = new File("D:\\Mateus Cohuzer\\Desktop\\Geral\\Java\\Mugen_Project\\src\\res\\musics\\crud_bgm.wav");
+            File file = new File("D:\\documentos\\GitHub\\Mugen-Project-2\\src\\res\\musics\\crud_bgm.wav");
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
             Clip clip = AudioSystem.getClip();
             clip.open(audioStream);
@@ -58,7 +58,7 @@ public class Musicas {
 
     public void playBGM3() {
         try {
-            File file = new File("D:\\Mateus Cohuzer\\Desktop\\Geral\\Java\\Mugen_Project\\src\\res\\musics\\stop.wav");
+            File file = new File("D:\\documentos\\GitHub\\Mugen-Project-2\\src\\res\\musics\\stop.wav");
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
             Clip clip = AudioSystem.getClip();
             clip.open(audioStream);
