@@ -135,11 +135,11 @@ class GUI extends JFrame {
             }
         });
 
-        pnOeste.setLayout(new GridLayout(6, 1));
+        pnOeste.setLayout(new GridLayout(5, 1));
         pnOeste.add(btPlay);
         pnOeste.add(btInfos);
         pnOeste.add(btPlaces);
-        pnOeste.add(btFaceRecog);
+        //pnOeste.add(btFaceRecog);
         pnOeste.add(btCRUD);
         pnOeste.add(btExit);
 
